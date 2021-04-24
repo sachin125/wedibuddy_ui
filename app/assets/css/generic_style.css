@@ -1,0 +1,157 @@
+.break_word{
+    word-wrap: break-word !important;
+}
+.display_inline_block{
+
+    display:inline-block;
+}
+/* Padding left start */
+.padding-left5 {padding-left:5px;}
+.padding-left10 {padding-left:10px;}
+.padding-left15 {padding-left:15px;}
+/* Padding left end */
+.padding-zero{
+    padding: 0 !important;
+}
+.pull-left{
+    float : left;
+}
+.pull-right{
+    float: right !important;
+}
+.border_top_grey{
+  border-top: 1px solid #f4f4f4;
+}
+.border_bottom_grey{
+  border-bottom: 1px solid #f4f4f4;
+}
+
+
+.flex_wrap{
+	flex-wrap: wrap !important;
+}
+.display_inline_flex {
+	display: inline-flex !important;
+}
+.cursor-pointer{
+    cursor:pointer !important;
+}
+.cursor-default{
+    cursor: default !important;
+}
+/*padding for pop up css :------Start*/
+.wrap_padding_three { padding: 4px; }
+.wrap_padding_topbottom_three { padding: 12px 0; }
+/*padding for pop up css :------End*/
+/*Overflow css :------start*/
+.overflow_auto{
+    overflow: auto !important;
+}
+.overflowy_auto{ 
+    overflow: auto;
+    overflow-x: hidden;
+}
+.overflowx_auto{ 
+    overflow: auto;
+    overflow-y: hidden;
+}
+.text-center{
+    text-align: center;
+}
+.text-left{
+    text-align: left;
+}
+/*Overflow css :------end*/
+/*edit icon css :------starts*/
+md-menu-item > .md-button md-icon.zmdi.zmdi-edit { line-height: 20px; }
+/*edit icon css :------end*/
+/*background white css :------starts*/
+.bg-col-whit { background : #fff !important ; }
+/*background white css :------end*/
+.margin-none{
+    margin:0 !important;
+}
+.padding_top_12 {
+    padding-top: 12px;
+}
+.padding_bottom_12 {
+    padding-bottom: 12px;
+}
+.padd-right-0 { padding-right:0 !important;}
+.mrgn-bottom { margin-bottom : 15px; }
+.mar-b-10 { margin-bottom : 10px; }
+.mrgn-bottom25 { margin-bottom : 25px; }
+.padding-bot5 { padding-bottom : 5px; }
+.mrgn-right-non {
+    margin-right : 0 !important ;
+    }
+    .padd-top0 {
+    padding-top : 0 !important ;
+    }
+    .padd-bot0 {
+    padding-bottom : 0 !important ;
+    }
+    .border-top-non {
+    border-top : none !important ;
+    }
+    .padding-right-20 {
+    padding-right : 20px !important ;
+    }
+    .padding-right-8 {
+    padding-right: 8px !important ;
+    }
+    .padding-top-10 {
+    padding-top : 10px !important ;
+    }
+    .padding-top-15 {
+    padding-top : 15px !important ;
+    }
+    .padd-left0 {
+    padding-left : 0 !important ;
+    }
+    /*-------------*/
+    .b-b{
+        border-bottom: 1px solid #1976d2;
+    }
+    .m-t-none{
+        margin-top:0px !important;
+    }
+    .p-t-sm{
+        padding-top:10px;
+    }
+    .p-b-sm{
+        padding-bottom:10px;
+    }
+    .m-b-none{
+        margin-bottom:0px !important;
+    }
+    .b-g-none{
+        background:transparent ;
+    }
+    .box-noshadow{
+        box-shadow:none;
+    }
+    .b-t{
+        border-top: 1px solid #1976d2;
+    }
+    .b-b-none{
+        border-bottom:none;
+    }
+    .p-t-md{
+        padding-top:15px;
+    }
+    .p-b-md{
+        padding-bottom:15px;
+    }
+    .text-sm{
+        font-size:12px;
+    }
+    .text-capitalize{
+        text-transform: capitalize;
+    }
+    .text-md{
+        font-size:14px;
+    }
+    .p-l-xxl{
+        padding-left:61px !important;
+    }

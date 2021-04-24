@@ -1,0 +1,96 @@
+<style>
+  md-dialog.fullscreen-dialog {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  .caller-name {
+    position: absolute;
+    top: 12px;
+    left: 13px;
+    z-index: 999;
+    font-weight: normal;
+    color:#fff;
+}
+.video-zoom-out { width:100%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 999;
+}
+.video-zoom-out i {
+    line-height: 40px;
+}
+/*.owr-overlay-video {position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -100; background-size: cover; }*/
+.fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+    background: #000;
+}
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.time-show-full{
+    position: absolute;
+    top: 34px;
+    left: 35px;
+    z-index: 9999;
+    color: #fff;
+}
+</style>
+<md-dialog class="fullscreen-dialog" aria-label="Assign Solution Partner" ng-cloak style="min-width: 810px;">
+  <form>
+    <md-dialog-content>
+      <div class="md-dialog-content" style="padding:0;">
+            <h4 class="caller-name">{{vm.currentConnectedUser.creator}}</h4>
+            <div class="time-show-full">{{elapsedTime}}</div>
+            <md-button class="md-fab md-mini md-primary video-zoom-out" ng-click="cancel()" aria-label="ASSIGN">
+                <i class="zmdi zmdi-fullscreen-exit"></i>
+            </md-button>
+            <div class="fullscreen-bg">
+            <video ng-style="{'transform': 'rotate({{fullScreenRotateDeg}}deg)', '-webkit-transform': 'rotate({{fullScreenRotateDeg}}deg)', '-ms-transform': 'rotate({{fullScreenRotateDeg}}deg)'}" ng-src="{{remoteViewSrc}}" class="shadow owr-overlay-video fullscreen-bg__video" autoplay ></video>
+          </div>
+        <!-- <div class="siteinputvaluesection">
+          <div class="siteinputrow nomargin" layout="row" layout-align="space-between start">
+            <md-input-container class="md-block" flex="33">
+            <label>Site Name</label>
+            <input ng-model="projectTask.siteName" disabled>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex="33">
+            <label>Work Order No.</label>
+            <input ng-model="projectTask.workOrderName " disabled>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex="33">
+            <label>Task Name</label>
+            <input ng-model="projectTask.name" disabled>
+          </md-input-container>
+
+          </div>
+        </div> -->
+        <button style="position: absolute; bottom: 7%; left: 45%;" ng-click="hangUpCall()" class="md-fab md-button md-ink-ripple call-end-btn" type="submit"  aria-label="Disconnect">
+        	<i class="zmdi zmdi-phone-end"></i>
+     	 </button>
+      </div>
+
+    </md-dialog-content>
+    <!-- <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="answer('not useful')">Cancel</md-button>
+      <md-button ng-click="answer('useful')" style="margin-left:8px; margin-right:20px;">Submit</md-button>
+    </md-dialog-actions> -->
+  </form>
+</md-dialog>

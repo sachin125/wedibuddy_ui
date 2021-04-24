@@ -1,0 +1,948 @@
+<style>
+.active {
+  background-color: #ccc;
+}
+
+.left-align{
+text-align: left;	
+}
+.bottom-border { border-bottom: 1px solid grey; height: 50px;}
+.tableWidthAndBorder{ width:100%; border-collapse: collapse;}
+
+</style>
+<div layout="column" flex="60">
+	<div layout="row">
+		<md-card class="sd-card" flex="25" >
+				<img style="max-height: 300px;max-width: 300px;" height="300px" src="../app/assets/img/user.jpg" onerror="this.src='../app/assets/img/user.jpg'"/>
+		</md-card>
+		<div flex="75">
+			<md-card class="sd-card" layout="column" layout-align="start stretch" flex style="height: 300px;padding: 8px;">
+				<h1 style="color: #3f51b5;">{{user.firstname}} {{user.lastname}}</h1>
+				<md-divider></md-divider>
+				<h3>{{work.position}} at {{work.organization}}</h3>
+				<md-divider></md-divider>
+				<h3>Studied {{education.coursename}} <span ng-if="education.address">at {{education.address.name}} {{education.address.city}} {{education.address.state}}</span></h3>
+				<md-divider></md-divider>
+				<h3 ng-if="educationObj.address"><span>Lives in {{educationObj.address.name}} {{educationObj.address.city}} {{educationObj.address.state}}</span></h3>
+				<md-divider></md-divider>
+			</md-card>	
+		</div>		
+	</div>
+	<md-divider></md-divider>
+	<div>
+		<div flex style="margin-left:8px;margin-right:8px;">
+			<md-toolbar layout="row" style="background-color: white;">
+				<div class="md-toolbar-tools">
+				  <h2 class="md-flex" style="color:black;">About</h2>
+				</div>
+			  </md-toolbar>
+		</div>
+		<div flex layout="row" ng-init="activeTab=1">
+			<md-card class="sd-card" layout="column" layout-align="start stretch" flex="20">
+				<div  layout="column" layout-align="start start" flex>
+					<div ng-class="{'active': activeTab===1}" style="width:100%">
+						<md-button class="left-align" ng-click="activeTab=1">Account Info</md-button>
+					</div>
+					<div ng-class="{'active': activeTab===2}" style="width:100%">
+						<md-button class="left-align" ng-click="activeTab=2">Personal Info</md-button>
+					</div>
+					<div class="label" ng-class="{'active': activeTab===3}" style="width:100%">
+						<md-button class="left-align" ng-click="activeTab=3">Family</md-button>
+					</div>
+					<div class="label" ng-class="{'active': activeTab===4}" style="width:100%">
+						<md-button class="left-align" ng-click="activeTab=4">Education</md-button>
+					</div>
+					<div class="label" ng-class="{'active': activeTab===5}" style="width:100%">
+						<md-button class="left-align" ng-click="activeTab=5">Work</md-button>
+					</div>
+				</div>
+			</md-card>	
+				<md-card class="sd-card" layout="column" layout-align="start stretch" flex="80">
+				<div class="wrapper"  flex>	
+					<md-content layout-padding flex class="content">
+<!--
+						Account Info
+-->
+						<div ng-if="activeTab===1">
+							<form name="Account_Info_form" id="Account_Info_form">
+							<div flex layout="row">
+								<h3 flex>Account Info</h3>
+								<md-button md-no-ink class="md-primary" ng-click="editProfile('IsAccountInformationEditable');" ng-if="!IsAccountInformationEditable">Edit</md-button>
+								<div ng-if="IsAccountInformationEditable">
+									<md-button md-no-ink class="md-primary" ng-click="cancelEditProfile('IsAccountInformationEditable');">Cancel</md-button>
+									<md-button md-no-ink class="md-primary" ng-click="saveProfile('IsAccountInformationEditable');" ng-disabled="Account_Info_form.$invalid">Save</md-button>
+								</div>
+							</div>
+								<table flex class="tableWidthAndBorder">
+										<tr class="bottom-border">
+											<td><label>Name:</label> </td>
+											<td>
+												<div ng-if="!IsAccountInformationEditable">
+													{{user.firstname}} {{user.lastname}}
+												</div>
+												<div ng-if="IsAccountInformationEditable">
+													 <md-input-container class="md-block" flex>
+														<label>FirstName</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.user.firstname" >
+													</md-input-container>
+													 <md-input-container class="md-block" flex>
+														<label>Lastname</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.user.lastname" >
+													</md-input-container>
+												</div>
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>DOB:</label> </td>
+											<td>
+												<div ng-if="!IsAccountInformationEditable">
+													{{user.dob | date:'MMM d, y h:mm:ss a'}}
+												</div>
+												<div ng-if="IsAccountInformationEditable">
+													 <md-input-container class="md-block" flex>
+														<label>Dob</label>
+														<input mdc-datetime-picker="" date="true" time="true" type="text" id="datetimeauto" placeholder="Date" show-todays-date="" minutes="true" min-date="date" auto-ok="true" short-time="true" ng-model="user.dob" class="md-input">
+<!--
+														<input ng-model="user.dob" >
+-->
+													</md-input-container>
+												</div>
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Contactno:</label> </td>
+											<td>
+												<div ng-if="!IsAccountInformationEditable">
+													{{user.contactno || "--"}}
+												</div>
+												<div ng-if="IsAccountInformationEditable">
+													 <md-input-container class="md-block" flex>
+														<label>ContactNo</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.user.contactno" >
+													</md-input-container>
+												</div>
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Email ID:</label> </td>
+											<td>
+												<div ng-if="!IsAccountInformationEditable">
+													{{user.username || "--"}}
+												</div>
+												<div ng-if="IsAccountInformationEditable">
+													<span style="color:red">If you change emailid then you will have to verify emailid.</span>
+													 <md-input-container class="md-block" flex>
+														<label>Emailid</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.user.username" >
+													</md-input-container>
+												</div>
+											</td>
+										</tr>
+										<tr class="bottom-border" ng-if="IsAccountInformationEditable">
+											<td><label>Current Password:</label> </td>
+											<td>
+												{{editUserWithAssociateObjectWrapper.user.checksum}}
+												 <md-input-container class="md-block" flex>
+													<label>Password</label>
+													<input type="password" ng-model="editUserWithAssociateObjectWrapper.user.checksum" ng-required="true">
+												</md-input-container>
+											</td>
+										</tr>
+								</table>
+							</form>
+						</div>
+						<div ng-if="activeTab===2">
+							<form name="Personal_Info_form" id="Personal_Info_form">
+							<div flex layout="row">
+								<h3 flex>Personal Info</h3>
+								<md-button md-no-ink class="md-primary" ng-click="editProfile('IsPersonalInformationEditable');" ng-if="!IsPersonalInformationEditable">Edit</md-button>
+								<div ng-if="IsPersonalInformationEditable">
+									<md-button md-no-ink class="md-primary" ng-click="cancelEditProfile('IsPersonalInformationEditable');" >Cancel</md-button>
+									<md-button md-no-ink class="md-primary" ng-click="saveProfile('IsPersonalInformationEditable');" ng-disabled="Personal_Info_form.$invalid">Save</md-button>
+								</div>
+							</div>
+							<table flex class="tableWidthAndBorder">
+										<tr class="bottom-border">
+											<td>
+												Height:
+											</td>
+											<td>
+												<div ng-if="!IsPersonalInformationEditable">
+													{{userProfile.height || "--"}}
+												</div>
+												<div ng-if="IsPersonalInformationEditable">
+													 <md-input-container class="md-block" flex>
+														<label>Height</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.userProfile.height" >
+													</md-input-container>
+												</div>
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td>
+												Weight:
+											</td>
+											<td>
+												<div ng-if="!IsPersonalInformationEditable">
+													{{userProfile.weight || "--"}}
+												</div>
+												<div ng-if="IsPersonalInformationEditable">
+													 <md-input-container class="md-block" flex>
+														<label>Weight</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.userProfile.weight" >
+													</md-input-container>
+												</div>
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td>
+												Salary:
+											</td>
+											<td>
+												<div ng-if="!IsPersonalInformationEditable">
+													{{userProfile.salary || "--"}}
+												</div>
+												<div ng-if="IsPersonalInformationEditable">
+													 <md-input-container class="md-block" flex>
+														<label>Salary (in per ann.)</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.userProfile.salary" >
+													</md-input-container>
+												</div>
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td>
+												Relationship:
+											</td>
+											<td>
+												<div ng-if="!IsPersonalInformationEditable">
+													{{userProfile.relationShip || "--"}}
+												</div>
+												<div ng-if="IsPersonalInformationEditable">
+													 <md-input-container class="md-block" flex>
+														 <label>RelationShip</label>
+														 <md-select ng-model="editUserWithAssociateObjectWrapper.userProfile.relationShip">
+															  <md-option ng-repeat="RelationshipType in relationshipTypes" value="{{RelationshipType.ACTUAL}}">
+																{{RelationshipType.TOSHOW}}
+															  </md-option>
+														  </md-select>													
+													</md-input-container>
+												</div>
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td>
+												Diet:
+											</td>
+											<td>
+												<div ng-if="!IsPersonalInformationEditable">
+													{{userProfile.diet || "--"}}
+												</div>
+												<div ng-if="IsPersonalInformationEditable">
+													 <md-input-container class="md-block" flex>
+														<label>Diet</label>
+														<md-select ng-model="editUserWithAssociateObjectWrapper.userProfile.diet">
+															  <md-option ng-repeat="dietType in dietTypes" value="{{dietType.ACTUAL}}">
+																{{dietType.TOSHOW}}
+															  </md-option>
+														  </md-select>
+													</md-input-container>
+												</div>
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Current Location:</label> </td>
+											<td>
+												<div ng-if="!IsPersonalInformationEditable">
+													<span>{{userProfile.currentAddress.name}}, {{userProfile.currentAddress.city}} {{userProfile.currentAddress.state}} {{userProfile.currentAddress.country}} {{userProfile.currentAddress.pincode}} </span>
+												</div>
+												<div ng-if="IsPersonalInformationEditable">
+													<md-input-container class="md-block" flex>
+														<label>Area</label>
+														<input ng-model="userProfile.currentAddress.name" >
+													</md-input-container>
+													<md-input-container class="md-block" flex>
+														<label>City</label>
+														<input ng-model="userProfile.currentAddress.city" >
+													</md-input-container>
+													<md-input-container class="md-block" flex>
+														<label>Pincode</label>
+														<input ng-model="userProfile.currentAddress.pincode" >
+													</md-input-container>
+													<md-input-container class="md-block" flex>
+														<label>State</label>
+														<input ng-model="userProfile.currentAddress.state" >
+													</md-input-container>
+													<md-input-container class="md-block" flex>
+														<label>Country</label>
+														<input ng-model="userProfile.currentAddress.country" >
+													</md-input-container>
+												</div>
+											</td>
+										</tr>
+								</table>
+							</form>
+						</div>
+<!--
+						Family
+-->
+						<div ng-if="activeTab===3">
+							<form name="family_Info_form" id="family_Info_form">
+								<div flex layout="row">
+									<h3 flex>Family Info</h3>
+									<md-button md-no-ink class="md-primary" ng-click="editProfile('IsFamilyInformationEditable');" ng-if="!IsFamilyInformationEditable">Edit</md-button>
+									<div ng-if="IsFamilyInformationEditable">
+										<md-button md-no-ink class="md-primary" ng-click="cancelEditProfile('IsFamilyInformationEditable');" >Cancel</md-button>
+										<md-button md-no-ink class="md-primary" ng-click="saveProfile('IsFamilyInformationEditable');" ng-disabled="family_Info_form.$invalid">Save</md-button>
+									</div>
+								</div>
+									<table flex class="tableWidthAndBorder">
+										<tr class="bottom-border">
+												<td><label>Father:</label></td>
+												<td>
+													<div ng-if="!IsFamilyInformationEditable">
+														{{family.fatherfirstname}} {{family.fatherlastname}}
+													</div>
+													<div ng-if="IsFamilyInformationEditable">
+														 <md-input-container class="md-block" flex>
+															<label>FirstName</label>
+															<input ng-model="editfamily.fatherfirstname" >
+														</md-input-container>
+														<md-input-container class="md-block" flex>
+															<label>Lastname</label>
+															<input ng-model="editfamily.fatherlastname" >
+														</md-input-container>
+													</div>
+												</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>Mother:</label></td>
+												<td>
+													<div ng-if="!IsFamilyInformationEditable">
+														{{family.motherfirstname}} {{family.motherlastname}}
+													</div>
+													<div ng-if="IsFamilyInformationEditable">
+														 <md-input-container class="md-block" flex>
+															<label>FirstName</label>
+															<input ng-model="editfamily.motherfirstname" >
+														</md-input-container>
+														<md-input-container class="md-block" flex>
+															<label>Lastname</label>
+															<input ng-model="editfamily.motherlastname" >
+														</md-input-container>
+													</div>
+												</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>Father occupation:</label></td>
+												<td>
+													<div ng-if="!IsFamilyInformationEditable">
+														{{family.fatherOccupation || "--"}}
+													</div>
+													<div ng-if="IsFamilyInformationEditable">
+														 <md-input-container class="md-block" flex>
+															<label>FirstName</label>
+															<input ng-model="editfamily.fatherOccupation" >
+														</md-input-container>
+													</div>
+												</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>Mother occupation:</label></td>
+												<td>
+													<div ng-if="!IsFamilyInformationEditable">
+														{{family.motherOccupation || "--"}}
+													</div>
+													<div ng-if="IsFamilyInformationEditable">
+														 <md-input-container class="md-block" flex>
+															<label>FirstName</label>
+															<input ng-model="editfamily.motherOccupation" >
+														</md-input-container>
+													</div>
+												</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>Deity:</label></td>
+												<td>
+													<div ng-if="!IsFamilyInformationEditable">
+														{{family.deity.name || "--"}}
+													</div>
+													<div ng-if="IsFamilyInformationEditable">
+														 <md-input-container class="md-block" flex>
+															<label>Deity</label>
+															<md-select ng-model="editfamily.deity.id" ng-change="onChangeDeity();">
+															  <md-option ng-repeat="deityType in deityTypes" value="{{deityType.id}}">
+																{{deityType.name}}
+															  </md-option>
+															</md-select>
+														</md-input-container>
+													</div>	
+												</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>Goutra:</label></td>
+												<td>
+													<div ng-if="!IsFamilyInformationEditable">
+														{{family.goutra.name || "--"}}
+													</div>
+													<div ng-if="IsFamilyInformationEditable">
+														 <md-input-container class="md-block" flex>
+															<label>Goutra</label>
+															<md-select ng-model="editfamily.goutra.id" ng-change="onChangeGoutra();">
+															  <md-option ng-repeat="goutraType in goutraTypes" value="{{goutraType.id}}">
+																{{goutraType.name}}
+															  </md-option>
+														  </md-select>
+														</md-input-container>
+													</div>	
+												</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>Home Telephone:</label></td>
+												<td>
+													<div ng-if="!IsFamilyInformationEditable">
+														{{family.homeContactno || "--"}}
+													</div>
+													<div ng-if="IsFamilyInformationEditable">
+														 <md-input-container class="md-block" flex>
+															<label>Home Telephone</label>
+															<input ng-model="editfamily.homeContactno" >
+														</md-input-container>
+													</div>
+												</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>HomeTown:</label></td>
+												<td>
+													<div ng-if="!IsFamilyInformationEditable">
+														<span>{{family.homeAddress.name}}, {{family.homeAddress.city}} {{family.homeAddress.state}} {{family.homeAddress.country}} {{family.homeAddress.pincode}} </span>
+													</div>
+													<div ng-if="IsFamilyInformationEditable">
+														<md-input-container class="md-block" flex>
+															<label>Area</label>
+															<input ng-model="editfamily.homeAddress.name" >
+														</md-input-container>
+														<md-input-container class="md-block" flex>
+															<label>City</label>
+															<input ng-model="editfamily.homeAddress.city" >
+														</md-input-container>
+														<md-input-container class="md-block" flex>
+															<label>Pincode</label>
+															<input ng-model="editfamily.homeAddress.pincode" >
+														</md-input-container>
+														<md-input-container class="md-block" flex>
+															<label>State</label>
+															<input ng-model="editfamily.homeAddress.state" >
+														</md-input-container>
+														<md-input-container class="md-block" flex>
+															<label>Country</label>
+															<input ng-model="editfamily.homeAddress.country" >
+														</md-input-container>
+													</div>
+												</td>
+											</tr>
+											<tr class="bottom-border">
+												<td>Nanihal</td>
+												<td>
+													<div ng-if="!IsFamilyInformationEditable">
+														{{family.nanihal || "--"}}
+													</div>
+													<div ng-if="IsFamilyInformationEditable">
+														 <md-input-container class="md-block" flex>
+															<label>Nanihal</label>
+															<input ng-model="editfamily.nanihal" >
+														</md-input-container>
+													</div>
+												</td>
+											</tr>
+									</table>
+							</form>
+						</div>
+<!--
+						Education
+-->
+						<div ng-if="activeTab===4">
+								<div layout="column" >
+									<div flex layout="row">
+										<h3 flex>Education Info</h3>
+										<md-button md-no-ink class="md-primary" ng-click="EducationInformationTabObj.addable=!EducationInformationTabObj.addable;" ng-if="!EducationInformationTabObj.addable">Add</md-button>
+										<div ng-if="EducationInformationTabObj.addable">
+											<md-button md-no-ink class="md-primary" ng-click="EducationInformationTabObj.addable=!EducationInformationTabObj.addable" >Cancel</md-button>
+											<md-button md-no-ink class="md-primary" ng-click="mergeEducationInfo(addEducationObj,null,null);" ng-disabled="education_add_form.$invalid">Save</md-button>
+										</div>
+									</div>
+									<div id="education_add_form_id" ng-if="EducationInformationTabObj.addable">
+										<ng-form name="education_add_form" id="education_add_form">
+											<md-card md-theme="default" md-theme-watch style="padding: 1%;">
+												<table class="tableWidthAndBorder" >
+														<tr class="bottom-border">
+															<td flex="50"><label>Level:</label></td>
+															<td flex="50">
+																<div>
+																	 <md-input-container class="md-block">
+																		<label>Level: {{addEducationObj.educationLevel}}</label>
+																		<md-select ng-model="addEducationObj.educationLevel">
+																			  <md-option ng-repeat="educationLevelType in educationLevelTypes" value="{{educationLevelType.ACTUAL}}">
+																				{{educationLevelType.TOSHOW}}
+																			  </md-option>
+																		  </md-select>
+																	</md-input-container>
+																</div>
+															</td>
+														</tr>
+														<tr class="bottom-border">
+															<td><label>Course:</label></td>
+															<td>
+																<div>
+																	 <md-input-container class="md-block">
+																		<label>Course</label>
+																		<input ng-model="addEducationObj.coursename" >
+																	</md-input-container>
+																</div>
+															</td>
+														</tr>
+														<tr class="bottom-border">
+															<td><label>Address:</label></td>
+															<td>
+																<div>
+																	<md-input-container class="md-block" flex>
+																		<label>Name/Area</label>
+																		<input ng-model="addEducationObj.address.name" >
+																	</md-input-container>
+																	<md-input-container class="md-block" flex>
+																		<label>City</label>
+																		<input ng-model="addEducationObj.address.city" >
+																	</md-input-container>
+																	<md-input-container class="md-block" flex>
+																		<label>Pincode</label>
+																		<input ng-model="addEducationObj.address.pincode" >
+																	</md-input-container>
+																	<md-input-container class="md-block" flex>
+																		<label>State</label>
+																		<input ng-model="addEducationObj.address.state" >
+																	</md-input-container>
+																	<md-input-container class="md-block" flex>
+																		<label>Country</label>
+																		<input ng-model="addEducationObj.address.country" >
+																	</md-input-container>
+																</div>
+															</td>
+														</tr>
+														<tr class="bottom-border">
+															<td><label>Time period:</label></td>
+															<td>
+																<div>
+																	 <md-input-container class="md-block" flex>
+																		<label><b>From</b></label>
+																		<input time="false" date="true" mdc-datetime-picker="" type="text" id="date" day-of-week-len="3" placeholder="Date" click-outside-to-close="true" show-todays-date="" today-btn="false" ng-model="addEducationObj.fromDate" min-date="minDate" max-date="maxDate" class=" md-input">
+																	</md-input-container>
+																	 <md-input-container class="md-block" flex>
+																		 <label><b>To</b></label>
+																		 <input time="false" date="true" mdc-datetime-picker="" type="text" id="date" day-of-week-len="3" placeholder="Date" click-outside-to-close="true" show-todays-date="" today-btn="false" ng-model="addEducationObj.toDate" min-date="minDate" max-date="maxDate" class=" md-input">
+																	</md-input-container>													
+																</div>
+															</td>
+														</tr>
+														<tr class="bottom-border">
+															<td><label>Description:</label></td>
+															<td>
+																<div>
+																	<md-input-container class="md-block" flex>
+																		<label>Description</label>
+																		<input ng-model="addEducationObj.description" >
+																	</md-input-container>
+																</div>
+															</td>
+														</tr>
+												</table>
+											</md-card>	
+										</ng-form>
+									</div>
+								</div>
+								<div ng-repeat="educationObj in educationList" ng-init="formName = 'education_Info_form' + $index" ng-if="!EducationInformationTabObj.addable">
+									<ng-form name="{{formName}}" id="{{formName}}" ng-init="EducationInformationTabArray[$index].editable=false;">
+										<md-card md-theme="default" md-theme-watch style="padding: 1%;">
+											<div layout="row">
+												<h3>#{{$index+1}}</h3>
+												<span flex></span>
+												<div ng-if="!EducationInformationTabArray[$index].editable">
+													<md-button md-no-ink class="md-primary" ng-click="EducationInformationTabArray[$index].editable=!EducationInformationTabArray[$index].editable">Edit</md-button>
+													<md-button md-no-ink class="md-primary" ng-click="deleteEducation(educationObj,$index,IsEducationInformationEditableObj);">Delete</md-button>
+												</div>
+												<div ng-if="EducationInformationTabArray[$index].editable">
+													<md-button md-no-ink class="md-primary" ng-click="EducationInformationTabArray[$index].editable=!EducationInformationTabArray[$index].editable;cancelToEditEducationObjFromList($index)" >Cancel</md-button>
+													<md-button md-no-ink class="md-primary" ng-click="mergeEducationInfo(educationObj,$index,IsEducationInformationEditableObj);" ng-disabled="education_Info_form.$invalid">Save</md-button>
+												</div>
+											</div>
+											<table class="tableWidthAndBorder" >
+													<tr class="bottom-border">
+														<td flex="50"><label>Level:</label></td>
+														<td flex="50">
+															<div ng-if="!EducationInformationTabArray[$index].editable">
+																	{{educationObj.educationLevel || "--"}}
+															</div>
+															<div ng-if="EducationInformationTabArray[$index].editable">
+																 <md-input-container class="md-block">
+																	<label>Level: {{educationObj.educationLevel}}</label>
+																	<md-select ng-model="educationObj.educationLevel">
+																		  <md-option ng-repeat="educationLevelType in educationLevelTypes" value="{{educationLevelType.ACTUAL}}">
+																			{{educationLevelType.TOSHOW}}
+																		  </md-option>
+																	  </md-select>
+																</md-input-container>
+															</div>
+														</td>
+													</tr>
+													<tr class="bottom-border">
+														<td><label>Course:</label></td>
+														<td>
+															<div ng-if="!EducationInformationTabArray[$index].editable">
+																	{{educationObj.coursename || "--"}}
+															</div>
+															<div ng-if="EducationInformationTabArray[$index].editable">
+																 <md-input-container class="md-block">
+																	<label>Course</label>
+																	<input ng-model="educationObj.coursename" >
+																</md-input-container>
+															</div>
+														</td>
+													</tr>
+													<tr class="bottom-border">
+														<td><label>Address:</label></td>
+														<td>
+															<div ng-if="!EducationInformationTabArray[$index].editable">
+																{{educationObj.address.name}}, {{educationObj.address.city}} {{educationObj.address.state}} {{educationObj.address.country}} {{educationObj.address.pincode}}
+															</div>
+															<div ng-if="EducationInformationTabArray[$index].editable">
+																<md-input-container class="md-block" flex>
+																	<label>Name/Area</label>
+																	<input ng-model="educationObj.address.name" >
+																</md-input-container>
+																<md-input-container class="md-block" flex>
+																	<label>City</label>
+																	<input ng-model="educationObj.address.city" >
+																</md-input-container>
+																<md-input-container class="md-block" flex>
+																	<label>Pincode</label>
+																	<input ng-model="educationObj.address.pincode" >
+																</md-input-container>
+																<md-input-container class="md-block" flex>
+																	<label>State</label>
+																	<input ng-model="educationObj.address.state" >
+																</md-input-container>
+																<md-input-container class="md-block" flex>
+																	<label>Country</label>
+																	<input ng-model="educationObj.address.country" >
+																</md-input-container>
+															</div>
+														</td>
+													</tr>
+													<tr class="bottom-border">
+														<td><label>Time period:</label></td>
+														<td>
+															<div ng-if="!EducationInformationTabArray[$index].editable">
+																<div>From: {{educationObj.fromDate | date:'fullDate'}} </div> 
+																<div>To: {{educationObj.toDate | date:'fullDate'}}</div>
+															</div>
+															<div ng-if="EducationInformationTabArray[$index].editable">
+																 <md-input-container class="md-block" flex>
+																	<label><b>From</b></label>
+																	<input time="false" date="true" mdc-datetime-picker="" type="text" id="date" day-of-week-len="3" placeholder="Date" click-outside-to-close="true" show-todays-date="" today-btn="false" ng-model="educationObj.fromDate" min-date="minDate" max-date="maxDate" class=" md-input">
+																</md-input-container>
+																 <md-input-container class="md-block" flex>
+																	 <label><b>To</b></label>
+																	 <input time="false" date="true" mdc-datetime-picker="" type="text" id="date" day-of-week-len="3" placeholder="Date" click-outside-to-close="true" show-todays-date="" today-btn="false" ng-model="educationObj.toDate" min-date="minDate" max-date="maxDate" class=" md-input">
+																</md-input-container>													
+															</div>
+														</td>
+													</tr>
+													<tr class="bottom-border">
+														<td><label>Description:</label></td>
+														<td>
+															<div ng-if="!EducationInformationTabArray[$index].editable">
+																{{educationObj.description || "--"}}
+															</div>
+															<div ng-if="EducationInformationTabArray[$index].editable">
+																<md-input-container class="md-block" flex>
+																	<label>Description</label>
+																	<input ng-model="educationObj.description" >
+																</md-input-container>
+															</div>
+														</td>
+													</tr>
+											</table>
+										</md-card>	
+									</ng-form>
+								</div>	
+								<div ng-if="educationList.length==0">
+									No Data Available
+								</div>
+						</div>
+<!--
+						Work
+-->
+						<div ng-if="activeTab===5">
+								<div layout="column" >
+									<div flex layout="row">
+										<h3 flex>Work Info</h3>
+										<md-button md-no-ink class="md-primary" ng-click="WorkInformationTabObj.addable=!WorkInformationTabObj.addable;" ng-if="!WorkInformationTabObj.addable">Add</md-button>
+										<div ng-if="WorkInformationTabObj.addable">
+											<md-button md-no-ink class="md-primary" ng-click="WorkInformationTabObj.addable=!WorkInformationTabObj.addable" >Cancel</md-button>
+											<md-button md-no-ink class="md-primary" ng-click="mergeWorkInfo(addWorkObj,null,null);" ng-disabled="work_add_form.$invalid">Save</md-button>
+										</div>
+									</div>
+									<div id="work_add_form_id" ng-if="WorkInformationTabObj.addable">
+										<ng-form name="work_add_form" id="work_add_form">
+											<md-card md-theme="default" md-theme-watch style="padding: 1%;">
+												<table class="tableWidthAndBorder" >
+														<tr class="bottom-border">
+															<td flex="50"><label>Position:</label></td>
+															<td flex="50">
+																<div>
+																	  <md-input-container class="md-block">
+																		<label>Position</label>
+																		<input ng-model="addWorkObj.position" >
+																	</md-input-container>
+																</div>
+															</td>
+														</tr>
+														<tr class="bottom-border">
+															<td><label>Organization:</label></td>
+															<td>
+																<div>
+																	 <md-input-container class="md-block">
+																		<label>Organization</label>
+																		<input ng-model="addWorkObj.organization" >
+																	</md-input-container>
+																</div>
+															</td>
+														</tr>
+														<tr class="bottom-border">
+															<td><label>Address:</label></td>
+															<td>
+																<div>
+																	<md-input-container class="md-block" flex>
+																		<label>Name/Area</label>
+																		<input ng-model="addWorkObj.address.name" >
+																	</md-input-container>
+																	<md-input-container class="md-block" flex>
+																		<label>City</label>
+																		<input ng-model="addWorkObj.address.city" >
+																	</md-input-container>
+																	<md-input-container class="md-block" flex>
+																		<label>Pincode</label>
+																		<input ng-model="addWorkObj.address.pincode" >
+																	</md-input-container>
+																	<md-input-container class="md-block" flex>
+																		<label>State</label>
+																		<input ng-model="addWorkObj.address.state" >
+																	</md-input-container>
+																	<md-input-container class="md-block" flex>
+																		<label>Country</label>
+																		<input ng-model="addWorkObj.address.country" >
+																	</md-input-container>
+																</div>
+															</td>
+														</tr>
+														<tr class="bottom-border">
+															<td><label>Time period:</label></td>
+															<td>
+																<div>
+																	 <md-input-container class="md-block" flex>
+																		<label><b>From</b></label>
+																		<input time="false" date="true" mdc-datetime-picker="" type="text" id="date" day-of-week-len="3" placeholder="Date" click-outside-to-close="true" show-todays-date="" today-btn="false" ng-model="addWorkObj.fromDate" min-date="minDate" max-date="maxDate" class=" md-input">
+																	</md-input-container>
+																	 <md-input-container class="md-block" flex>
+																		 <label><b>To</b></label>
+																		 <input time="false" date="true" mdc-datetime-picker="" type="text" id="date" day-of-week-len="3" placeholder="Date" click-outside-to-close="true" show-todays-date="" today-btn="false" ng-model="addWorkObj.toDate" min-date="minDate" max-date="maxDate" class=" md-input">
+																	</md-input-container>													
+																</div>
+															</td>
+														</tr>
+														<tr class="bottom-border">
+															<td><label>Description:</label></td>
+															<td>
+																<div>
+																	<md-input-container class="md-block" flex>
+																		<label>Description</label>
+																		<input ng-model="addWorkObj.description" >
+																	</md-input-container>
+																</div>
+															</td>
+														</tr>
+												</table>
+											</md-card>	
+										</ng-form>
+									</div>
+								</div>
+								<div ng-repeat="workObj in workList" ng-init="formName = 'work_Info_form' + $index" ng-if="!WorkInformationTabObj.addable">
+									<ng-form name="{{formName}}" id="{{formName}}" ng-init="WorkInformationTabObj[$index].editable=false;">
+										<md-card md-theme="default" md-theme-watch style="padding: 1%;">
+											<div layout="row">
+												<h3>#{{$index+1}}</h3>
+												<span flex></span>
+												<div ng-if="!WorkInformationTabArray[$index].editable">
+													<md-button md-no-ink class="md-primary" ng-click="WorkInformationTabArray[$index].editable=!WorkInformationTabArray[$index].editable">Edit</md-button>
+													<md-button md-no-ink class="md-primary" ng-click="deleteWork(workObj,$index,IsWorkInformationEditableObj);">Delete</md-button>
+												</div>
+												<div ng-if="WorkInformationTabArray[$index].editable">
+													<md-button md-no-ink class="md-primary" ng-click="WorkInformationTabArray[$index].editable=!WorkInformationTabArray[$index].editable;cancelToEditWorkObjFromList($index)" >Cancel</md-button>
+													<md-button md-no-ink class="md-primary" ng-click="mergeWorkInfo(workObj,$index,IsWorkInformationEditableObj);" ng-disabled="work_Info_form.$invalid">Save</md-button>
+												</div>
+											</div>
+											<table class="tableWidthAndBorder" >
+													<tr class="bottom-border">
+														<td flex="50"><label>Job Type:</label></td>
+														<td flex="50">
+															<div ng-if="!WorkInformationTabArray[$index].editable">
+																	{{workObj.jobType || "--"}}
+															</div>
+															<div ng-if="WorkInformationTabArray[$index].editable">
+																 <md-input-container class="md-block">
+																	<label>Job Type:</label>
+																	<md-select ng-model="workObj.jobType">
+																		  <md-option ng-repeat="jobType in jobTypes" value="{{jobType.ACTUAL}}">
+																			{{jobType.TOSHOW}}
+																		  </md-option>
+																	  </md-select>
+																</md-input-container>
+															</div>
+														</td>
+													</tr>
+													<tr class="bottom-border">
+														<td flex="50"><label>Position:</label></td>
+														<td flex="50">
+															<div ng-if="!WorkInformationTabArray[$index].editable">
+																	{{workObj.position || "--"}}
+															</div>
+															<div ng-if="WorkInformationTabArray[$index].editable">
+																 <md-input-container class="md-block">
+																	<label>Position</label>
+																	<input ng-model="workObj.position" >
+																</md-input-container>
+															</div>
+														</td>
+													</tr>
+													<tr class="bottom-border">
+														<td><label>Organization:</label></td>
+														<td>
+															<div ng-if="!WorkInformationTabArray[$index].editable">
+																	{{workObj.organization || "--"}}
+															</div>
+															<div ng-if="WorkInformationTabArray[$index].editable">
+																 <md-input-container class="md-block">
+																	<label>Organization</label>
+																	<input ng-model="workObj.organization" >
+																</md-input-container>
+															</div>
+														</td>
+													</tr>
+													<tr class="bottom-border">
+														<td><label>Address:</label></td>
+														<td>
+															<div ng-if="!WorkInformationTabArray[$index].editable">
+																{{workObj.address.name}}, {{workObj.address.city}} {{workObj.address.state}} {{workObj.address.country}} {{workObj.address.pincode}}
+															</div>
+															<div ng-if="WorkInformationTabArray[$index].editable">
+																<md-input-container class="md-block" flex>
+																	<label>Name/Area</label>
+																	<input ng-model="workObj.address.name" >
+																</md-input-container>
+																<md-input-container class="md-block" flex>
+																	<label>City</label>
+																	<input ng-model="workObj.address.city" >
+																</md-input-container>
+																<md-input-container class="md-block" flex>
+																	<label>Pincode</label>
+																	<input ng-model="workObj.address.pincode" >
+																</md-input-container>
+																<md-input-container class="md-block" flex>
+																	<label>State</label>
+																	<input ng-model="workObj.address.state" >
+																</md-input-container>
+																<md-input-container class="md-block" flex>
+																	<label>Country</label>
+																	<input ng-model="workObj.address.country" >
+																</md-input-container>
+															</div>
+														</td>
+													</tr>
+													<tr class="bottom-border">
+														<td><label>Time period:</label></td>
+														<td>
+															<div ng-if="!WorkInformationTabArray[$index].editable">
+																<div><b>From:</b> {{workObj.fromDate | date:'fullDate'}} </div> 
+																<div><b>To:</b>{{workObj.toDate | date:'fullDate'}}</div>
+															</div>
+															<div ng-if="WorkInformationTabArray[$index].editable">
+																 <md-input-container class="md-block" flex>
+																	<label><b>From</b></label>
+																	<input time="false" date="true" mdc-datetime-picker="" type="text" id="date" day-of-week-len="3" placeholder="Date" click-outside-to-close="true" show-todays-date="" today-btn="false" ng-model="workObj.fromDate" min-date="minDate" max-date="maxDate" class=" md-input">
+																</md-input-container>
+																 <md-input-container class="md-block" flex>
+																	 <label><b>To</b></label>
+																	 <input time="false" date="true" mdc-datetime-picker="" type="text" id="date" day-of-week-len="3" placeholder="Date" click-outside-to-close="true" show-todays-date="" today-btn="false" ng-model="workObj.toDate" min-date="minDate" max-date="maxDate" class=" md-input">
+																</md-input-container>													
+															</div>
+														</td>
+													</tr>
+													<tr class="bottom-border">
+														<td><label>Description:</label></td>
+														<td>
+															<div ng-if="!WorkInformationTabArray[$index].editable">
+																{{workObj.description || "--"}}
+															</div>
+															<div ng-if="WorkInformationTabArray[$index].editable">
+																<md-input-container class="md-block" flex>
+																	<label>Description</label>
+																	<input ng-model="workObj.description" >
+																</md-input-container>
+															</div>
+														</td>
+													</tr>
+											</table>
+										</md-card>	
+									</ng-form>
+								</div>	
+								<div ng-if="workList.length==0">
+									No Data Available
+								</div>
+						</div>
+						
+<!--
+						Chnage Password
+-->
+<!--
+						<div ng-if="activeTab===6">
+							<div flex layout="row">
+								<h3 flex>Change Password</h3>
+								<md-button md-no-ink class="md-primary" ng-click="saveProfile('changePassword');" >Save</md-button>
+							</div>
+							<table flex class="tableWidthAndBorder">
+									<tr class="bottom-border">
+										<td>
+											<div>
+												 <md-input-container class="md-block" flex>
+													<label>Old Password</label>
+													<input ng-model="editUserWithAssociateObjectWrapper.user.firstname" >
+												</md-input-container>
+												 <md-input-container class="md-block" flex>
+													<label>New Password</label>
+													<input ng-model="editUserWithAssociateObjectWrapper.user.firstname" >
+												</md-input-container>
+												 <md-input-container class="md-block" flex>
+													<label>New Password</label>
+													<input ng-model="editUserWithAssociateObjectWrapper.user.firstname" >
+												</md-input-container>
+											</div>
+										</td>
+									</tr>
+							</table>		
+						</div>	
+-->
+					</md-content>
+				</div>
+			</md-card>	
+		</div>
+	</div>
+</div>

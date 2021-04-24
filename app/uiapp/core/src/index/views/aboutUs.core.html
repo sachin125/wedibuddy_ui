@@ -1,0 +1,763 @@
+<style>
+* {box-sizing:border-box}
+
+.mySlides {display:none; margin-top:15px;}
+.mySlides1 {display:none; margin-top:30px;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 100%;
+  position: relative;
+  margin: auto;
+  float:left;
+  padding:2%;
+  overflow:hidden;
+  
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor:pointer;
+  height: 13px;
+  width: 13px;
+  margin: 0 2px;
+  background-color: #d0d2d3;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #1565c0;
+}
+
+.dot1 {
+  cursor:pointer;
+  height: 13px;
+  width: 13px;
+  margin: 0 2px;
+  background-color: #d0d2d3;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot1:hover {
+  background-color: #1565c0;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+.switch-toggle a,
+.switch-light span span {
+  display: none; }
+
+@media only screen {
+  /* Checkbox
+ */
+  .switch-light {
+    position: relative;
+    display: block;
+    /* simulate default browser focus outlines on the switch,
+   * when the inputs are focused.
+   */ }
+    .switch-light::after {
+      clear: both;
+      content: "";
+      display: table; }
+    .switch-light *,
+    .switch-light *:before,
+    .switch-light *:after {
+      box-sizing: border-box; }
+    .switch-light a {
+      display: block;
+      -webkit-transition: all 0.2s ease-out;
+      -moz-transition: all 0.2s ease-out;
+      transition: all 0.2s ease-out; }
+    .switch-light label,
+    .switch-light > span {
+      /* breathing room for bootstrap/foundation classes.
+     */
+      line-height: 2em;
+      vertical-align: middle; }
+    .switch-light input:focus ~ span a,
+    .switch-light input:focus + label {
+      outline-width: 2px;
+      outline-style: solid;
+      outline-color: Highlight;
+      /* Chrome/Opera gets its native focus styles.
+     */ } }
+    @media only screen and (-webkit-min-device-pixel-ratio: 0) {
+      .switch-light input:focus ~ span a,
+      .switch-light input:focus + label {
+        outline-color: -webkit-focus-ring-color;
+        outline-style: auto; } }
+
+@media only screen {
+  /* don't hide the input from screen-readers and keyboard access
+ */
+  .switch-light input {
+    position: absolute;
+    opacity: 0;
+    z-index: 3; }
+  .switch-light input:checked ~ span a {
+    right: 0%; }
+  /* inherit from label
+ */
+  .switch-light strong {
+    font-weight: inherit; }
+  .switch-light > span {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    min-height: 2em;
+    /* overwrite 3rd party classes padding
+   * eg. bootstrap .well
+   */
+    padding: 0;
+    text-align: left; }
+  .switch-light span span {
+    position: relative;
+    z-index: 2;
+    display: block;
+    float: left;
+    width: 50%;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+  .switch-light a {
+    position: absolute;
+    right: 50%;
+    top: 0;
+    z-index: 1;
+    display: block;
+    width: 50%;
+    height: 100%;
+    padding: 0; }
+  /* Radio Switch
+ */
+  .switch-toggle {
+    position: relative;
+    display: block;
+    /* simulate default browser focus outlines on the switch,
+   * when the inputs are focused.
+   */
+    /* For callout panels in foundation
+  */
+    padding: 0 !important;
+    /* 2 items
+   */
+    /* 3 items
+   */
+    /* 4 items
+   */
+    /* 5 items
+   */
+    /* 6 items
+   */ }
+    .switch-toggle::after {
+      clear: both;
+      content: "";
+      display: table; }
+    .switch-toggle *,
+    .switch-toggle *:before,
+    .switch-toggle *:after {
+      box-sizing: border-box; }
+    .switch-toggle a {
+      display: block;
+      -webkit-transition: all 0.2s ease-out;
+      -moz-transition: all 0.2s ease-out;
+      transition: all 0.2s ease-out; }
+    .switch-toggle label,
+    .switch-toggle > span {
+      /* breathing room for bootstrap/foundation classes.
+     */
+      line-height: 2em;
+      vertical-align: middle; }
+    .switch-toggle input:focus ~ span a,
+    .switch-toggle input:focus + label {
+      outline-width: 2px;
+      outline-style: solid;
+      outline-color: Highlight;
+      /* Chrome/Opera gets its native focus styles.
+     */ } }
+    @media only screen and (-webkit-min-device-pixel-ratio: 0) {
+      .switch-toggle input:focus ~ span a,
+      .switch-toggle input:focus + label {
+        outline-color: -webkit-focus-ring-color;
+        outline-style: auto; } }
+
+@media only screen {
+    .switch-toggle input {
+      position: absolute;
+      left: 0;
+      opacity: 0; }
+    .switch-toggle input + label {
+      position: relative;
+      z-index: 2;
+      display: block;
+      float: left;
+      padding: 0 0.5em;
+      margin: 0;
+      text-align: center; }
+    .switch-toggle a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0;
+      z-index: 1;
+      width: 10px;
+      height: 100%; }
+
+  /* Candy Theme
+ * Based on the "Sort Switches / Toggles (PSD)" by Ormal Clarck
+ * http://www.premiumpixels.com/freebies/sort-switches-toggles-psd/
+ */
+  .switch-toggle.switch-candy,
+  .switch-light.switch-candy > span {
+    background-color: #eeeeee;
+    border-radius: 3px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.2); }
+  .switch-light.switch-candy span span,
+  .switch-light.switch-candy input:checked ~ span span:first-child,
+  .switch-toggle.switch-candy label {
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 1px 1px 1px #191b1e; }
+  .switch-light.switch-candy input ~ span span:first-child,
+  .switch-light.switch-candy input:checked ~ span span:nth-child(2),
+  .switch-candy input:checked + label {
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); }
+  .switch-candy a {
+    border: 1px solid #333;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+    background-color: #1565c0;
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.2), transparent);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent); }
+  .switch-candy-blue a {
+    background-color: #38a3d4; }
+  .switch-candy-yellow a {
+    background-color: #f5e560; }
+ 
+  /* switch-toggle
+ */
+  .switch-toggle.switch-material {
+    overflow: visible; }
+    .switch-toggle.switch-material::after {
+      clear: both;
+      content: "";
+      display: table; }
+ 
+  
+
+</style>
+
+<md-content layout="column" class="contentviewwrapper anim-slide-left" style="background:#fff;">
+<div layout="row">
+	<div flex></div>
+	<div flex="80" ng-if="!noVersion"><div class="vers-col" ><strong translate="Version:"> </strong><span >App V{{getWebModuleList.version| HtmlDecodeFilterCore}}</span></div></div>
+</div>
+<div class="slideshow-container" style="width:100%;">
+<h1 class="h1-overview"><span translate="Overview"></span></h1>
+<div layout="row" flex="100" class="mySlides fade" style="background-color:#fff">
+    <div class="slider-col-lft">
+        <h3 class="h3-overview" translate="App brings the power of a dynamic workflow along with mobility in field operations, facilitating near real-time insight in to network cycle management."> </h3>
+        <div class="text-overview"><p translate="In-built Issue Tracker and My Assignments management for increasing operational efficiency by enabling a truly mobile work force"></p>
+        <p translate="Mobile based unified platform for site installation, integration and commissioning process to empower field engineers."></p>
+        </div>
+    </div>
+    <div class="slider-col-rgt">
+      <img src="../app/assets/img/differentimages.png"  alt="SiteForge"/>
+    </div>
+</div>
+  
+
+<div class="mySlides fade">
+  <div class="slider-col-lft">
+        <h3 class="h3-overview">SiteFORGE brings the power of a dynamic workflow along with mobility in field operations, facilitating <span>near real-time</span> insight in to network cycle management.</h3>
+        <div class="text-overview"><p>In-built Issue Tracker and My Assignments management for increasing operational efficiency by enabling a truly mobile work force</p>
+        <p>Mobile based unified platform for site installation, integration and commissioning process to empower field engineers.</p>
+        </div>
+    </div>
+    <div class="slider-col-rgt">
+      <img src="../app/assets/img/desktopimages.png"  alt="SiteForge"/>
+    </div>
+</div>
+
+<div class="mySlides fade">
+  <div class="slider-col-lft">
+        <h3 class="h3-overview">SiteFORGE brings the power of a dynamic workflow along with mobility in field operations, facilitating <span>near real-time</span> insight in to network cycle management.</h3>
+        <div class="text-overview"><p>In-built Issue Tracker and My Assignments management for increasing operational efficiency by enabling a truly mobile work force</p>
+        <p>Mobile based unified platform for site installation, integration and commissioning process to empower field engineers.</p>
+        </div>
+    </div>
+    <div class="slider-col-rgt">
+      <img src="../app/assets/img/differentimages.png"  alt="SiteForge"/>
+    </div>
+</div>
+
+<a class="prev" style=" left:0;" onclick="plusSlides(-1)"><md-icon class="zmdi zmdi-chevron-left" style="color:#fff; "></md-icon></a>
+<a class="next" onclick="plusSlides(1)"><md-icon class="zmdi zmdi-chevron-right" style="color:#fff"></md-icon></a>
+<div style="text-align:center" ng-if="false">
+  <span class="dot" onclick="currentSlide(1)"></span>
+<!--
+  <span class="dot" onclick="currentSlide(2)"></span>
+-->
+<!--
+  <span class="dot" onclick="currentSlide(3)"></span>
+-->
+</div>
+</div>
+
+
+<!------ Features slider --------------------------->
+
+<div class="slideshow-container" style="width:100%; background:#f7f7f7;">
+<h1 class="h1-overview1" translate="Features"></h1>
+<div layout="row" flex="100" class="mySlides1 fade">
+	<div class="slider-col-rgt1">
+      <img src="../app/assets/img/desktopimages.png"  alt="SiteForge"/>
+    </div>
+    <div class="slider-col-lft1">
+        <h3 class="h3-configuration"><span translate="Configuration Compliance."></span></h3>
+        <div class="confg-points"><i class="zmdi zmdi-check"></i><span translate="Checks for compliance with golden configuration"></span></div>
+		<div class="confg-points"><i class="zmdi zmdi-check"></i><span translate="Allows to conduct performance gap analysis"></span></div>
+		<div class="confg-points"><i class="zmdi zmdi-check"></i><span translate="Checks for parameter compliance across network element, region  and network"></span></div>
+    </div>
+
+</div>
+  
+
+<div class="mySlides1 fade">
+  <div class="slider-col-rgt1">
+      <img src="../app/assets/img/desktopimages.png"  alt="SiteForge"/>
+    </div>
+   <div class="slider-col-lft">
+        <h3 class="h3-overview" translate="SiteFORGE brings the power of a dynamic workflow along with mobility in field operations, facilitating near real-time insight in to network cycle management."> </h3>
+        <div class="text-overview"><p translate="In-built Issue Tracker and My Assignments management for increasing operational efficiency by enabling a truly mobile work force"></p>
+        <p translate="Mobile based unified platform for site installation, integration and commissioning process to empower field engineers."></p>
+        </div>
+    </div>
+</div>
+
+<div class="mySlides1 fade">
+  <div class="slider-col-rgt1">
+      <img src="../app/assets/img/desktopimages.png"  alt="SiteForge"/>
+    </div>
+    <div class="slider-col-lft1">
+        <h3 class="h3-overview">SiteFORGE brings the power of a dynamic workflow along with mobility in field operations, facilitating <span>near real-time</span> insight in to network cycle management.</h3>
+        <div class="text-overview"><p>In-built Issue Tracker and My Assignments management for increasing operational efficiency by enabling a truly mobile work force</p>
+        <p>Mobile based unified platform for site installation, integration and commissioning process to empower field engineers.</p>
+        </div>
+    </div>
+</div>
+
+<a class="prev"  style=" left:0;" onclick="plusSlides1(-1)"><md-icon class="zmdi zmdi-chevron-left" style="color:#fff; "></md-icon></a>
+<a class="next" onclick="plusSlides1(1)"><md-icon class="zmdi zmdi-chevron-right" style="color:#fff"></md-icon></a>
+<div class="clear-both"></div>
+<div style="text-align:center">
+  <span class="dot1" onclick="currentSlide1(1)"></span>
+  <span class="dot1" onclick="currentSlide1(2)"></span>
+<!--
+  <span class="dot1" onclick="currentSlide1(3)"></span>
+-->
+</div>
+</div>
+
+</md-content>
+
+
+
+
+
+
+<script>
+//~ var slideIndex = 0;
+//~ showSlides();
+//~ 
+//~ function plusSlides1(n) {
+  //~ showSlides1(slideIndex1 += n);
+//~ }
+//~ 
+//~ function currentSlide1(n) {
+  //~ showSlides1(slideIndex1 = n);
+//~ }
+//~ 
+//~ function showSlides() {
+    //~ var i;
+    //~ var slides = document.getElementsByClassName("mySlides");
+    //~ var dots = document.getElementsByClassName("dot");
+    //~ for (i = 0; i < slides.length; i++) {
+       //~ slides[i].style.display = "none";
+    //~ }
+    //~ slideIndex++;
+    //~ if (slideIndex> slides.length) {slideIndex = 1}
+    //~ for (i = 0; i < dots.length; i++) {
+        //~ dots[i].className = dots[i].className.replace(" active", "");
+    //~ }
+    //~ slides[slideIndex-1].style.display = "block";
+    //~ dots[slideIndex-1].className += " active";
+    //~ setTimeout(showSlides, 2000); // Change image every 2 seconds
+//~ }
+
+
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+
+
+var slideIndex1 = 1;
+showSlides1(slideIndex1);
+
+function plusSlides1(n) {
+  showSlides1(slideIndex1 += n);
+}
+
+function currentSlide1(n) {
+  showSlides1(slideIndex1 = n);
+}
+
+function showSlides1(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides1");
+  
+  var dots = document.getElementsByClassName("dot1");
+  if (n > slides.length) {slideIndex1 = 1}
+  if (n < 1) {slideIndex1 = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex1-1].style.display = "block";
+  dots[slideIndex1-1].className += " active";
+   
+}
+</script>
+
+
+<!--
+<script>
+	angular.module('app', ['ui.bootstrap']);
+function CarouselDemoCtrl($scope){
+  $scope.myInterval = 3000;
+  $scope.slides = [
+    {
+      image: 'http://lorempixel.com/400/200/'
+    },
+    {
+      image: 'http://lorempixel.com/400/200/food'
+    },
+    {
+      image: 'http://lorempixel.com/400/200/sports'
+    },
+    {
+      image: 'http://lorempixel.com/400/200/people'
+    }
+  ];
+}
+</script>
+-->
+<div flex="100" style="margin:12px;">
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Features">
+        <md-content class="md-padding">
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/roundimage.png" style="margin-right:30px;margin-top:10px;height:25px;width:25px;" ng-if="getWebModuleList.releaseNotes.features!=null"> 
+            
+            <div class="description_text" flex="95" style="padding-top:2px;"> <td md-cell><span compile="getWebModuleList.releaseNotes.features | HtmlDecodeFilterCore"> </span></td></div>
+          </div>
+          
+           <div ng-if="getWebModuleList.releaseNotes.features==null" style="margin-left:330px;">
+			
+				<b> <label><span translate="Data Not Available for Features"></span></label> </b>
+			</div>
+<!--
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+-->
+        </md-content>
+      </md-tab>
+      <md-tab label="Fixed Defects">
+        <md-content class="md-padding">
+        
+        
+        <md-table-container class="sd-data-table-container fixedheader">
+		<table class="md-table-double border-top" md-table md-progress="promise">
+			<thead  fix-head  md-head md-order="query.order" md-on-reorder="onReorder">
+			<tr md-row>
+			<th md-column></th>
+			<th md-column ><span translate="Defect ID" ></span></th>
+             <th md-column ><span translate="Description" ></span></th>
+			<th md-column ><span translate="Notes" ></span></th>
+			
+        </tr>
+      </thead>	      
+      <tbody md-body> 
+         <tr md-row ng-repeat="getAlldefects in getWebModuleList.releaseNotes.defects" ng-if="getAlldefects.moduleType=='FIXED'">
+
+          <td><img src="../app/assets/img/roundimage.png" height="auto" style="margin-left:30px;"></td>
+            <td md-cell><span>{{getAlldefects.defectId | HtmlDecodeFilterCore}}</span></td>
+			  <td md-cell><span>{{getAlldefects.description | HtmlDecodeFilterCore}}</span></td>
+			 <td md-cell><span compile="getAlldefects.notes | HtmlDecodeFilterCore"> </span></td>
+
+		  </tr>
+      <tr md-row ng-if="getWebModuleList.releaseNotes.defects.length==0" ><td md-cell colspan="8" style="text-align: center;margin-left:150px;"><b><span translate="Data Not Available for Fixed Defects"></span></b></td></tr>
+      </tbody>
+    </table>
+  </md-table-container>
+<!--
+        /************************************************************************/
+        
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+-->
+        </md-content>
+      </md-tab>
+      <md-tab label="Known Limitations">
+        <md-content class="md-padding">
+			 <md-table-container class="sd-data-table-container fixedheader">
+		<table class="md-table-double border-top" md-table md-progress="promise">
+			<thead  fix-head  md-head >
+			<tr md-row>
+			<th md-column></th>
+			<th md-column ><span translate="Defect ID" ></span></th>
+             <th md-column ><span translate="Description" ></span></th>
+			<th md-column ><span translate="Notes" ></span></th>
+			
+        </tr>
+      </thead>	      
+      <tbody md-body>
+         <tr md-row ng-repeat="getAlldefects in getWebModuleList.releaseNotes.defects"ng-if="getAlldefects.moduleType=='OPEN'">
+             
+          <td><img src="../app/assets/img/roundimage.png" height="auto" style="margin-left:30px;"></td>
+            <td md-cell><span>{{getAlldefects.defectId | HtmlDecodeFilterCore}}</span></td>
+			  <td md-cell><span>{{getAlldefects.description | HtmlDecodeFilterCore}}</span></td>
+			 <td md-cell><span compile="getAlldefects.notes | HtmlDecodeFilterCore"> </span></td>
+
+		  </tr>
+        <tr md-row ng-if="getWebModuleList.releaseNotes.defects.length==0" ><td md-cell colspan="8" style="text-align: center;margin-left:150px;"><b><span translate="Data Not Available for Known Limitations"></span></b></td></tr>
+      </tbody>
+    </table>
+  </md-table-container>
+			
+<md-tab label="Previous Log">
+        <md-content class="md-padding">
+			 <md-table-container class="sd-data-table-container fixedheader">
+		<table class="md-table-double border-top" md-table md-progress="promise">
+			<thead  fix-head  md-head >
+			<tr md-row>
+			<th  md-column ><span translate="Version" ></span></th>
+			<th md-column class="width250" ><span translate="Module" ></span></th>
+             <th md-column ><span translate="Remarks" ></span></th>
+			<th md-column ><span translate="Download" ></span></th>
+        </tr>
+      </thead>	      
+      <tbody md-body>
+         <tr md-row>
+				<td md-cell ><span>{{getWebModuleList.version| HtmlDecodeFilterCore}}</span></td>
+				<td  md-cell class="width250"><span>{{getWebModuleList.webModule.moduleName | HtmlDecodeFilterCore}}</span></td>
+				<td md-cell><span compile="getWebModuleList.remark | HtmlDecodeFilterCore"> </span></td>
+			 <td md-cell>
+              <md-icon ng-if="getWebModuleList.releaseNotes.features!=null || getWebModuleList.releaseNotes.defects.length!=0 "  data-ng-click="downloadPdfForWebversion(releaseidfordownloadpdf);" style="color:red;font-size: 20px" class="fa fa-file-pdf-o material-icons" role="button" tabindex="0" aria-hidden="true">
+				   <md-tooltip md-direction="top">
+				<span translate="Download Release Notes"></span>
+			</md-tooltip>
+              </md-icon>
+              </td>
+		  </tr>
+          <tr md-row ng-if="noVersion" ><td md-cell colspan="8" style="text-align: center;margin-left:150px;"><b><span translate="No Version Released Yet"></span></b></td></tr>
+      </tbody>
+    </table>
+  </md-table-container>
+			
+<!--
+			/*******************************************/
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+          <div layout="row" class="md-padding">
+            <img src="../app/assets/img/sf-bullet.png" height="auto" style="margin-right:10px;">
+            <div class="description_text" flex="95" style="padding-top:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate.</div>
+          </div>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+    </div>
+-->
+</md-content>
+<style>
+.tabsdemoDynamicHeight md-content 
+{
+    background-color: transparent !important; 
+}
+.tabsdemoDynamicHeight md-content md-tabs 
+{
+    background: #f6f6f6;
+    border: 1px solid #e1e1e1; 
+}
+.tabsdemoDynamicHeight md-content md-tabs md-tabs-wrapper 
+{
+    background: white; 
+}
+.tabsdemoDynamicHeight md-content h1:first-child 
+{
+    margin-top: 0; 
+}
+.header_text
+{
+    font-size: 20px;
+    font-weight: bold;
+}
+.description_text
+{
+    font-size: 14px;
+}
+.text_styling
+{
+  font-size: 16px;
+  color: #292c50;
+  line-height: 21px;
+}
+</style>
+
+
+

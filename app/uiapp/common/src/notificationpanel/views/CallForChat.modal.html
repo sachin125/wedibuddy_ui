@@ -1,0 +1,91 @@
+ <style>
+.dialog-box {max-width:400px !important; min-width:400px !important; background:#2196f3 !important;}
+.calling-span {
+    font-size: 18px;
+    color: #fff; float:left; width:100%; margin: 0 0 10px 0; text-align:left !important;
+}
+.user-detail-left { float:left; width:30%; display:inline-block; text-align:center;}
+.user-pic-span {
+    width: 90px;
+    height: 90px;
+    display: inline-block;
+    background: #fff;
+    border-radius: 50%; margin-top:20px; text-align:center; overflow: hidden;
+}
+.user-pic-span img { width:100%;}
+.user-name-h3 { float:left; width:100%; color:#fff; text-align:center; margin-bottom: 0;}
+.user-detail-right { float:left; width:70%; margin-top:30px;}
+.site-detail-list {float:left; width:60%; margin-left: 20px;}
+.user-detail-right .site-detail-list-ul {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.user-detail-right .site-detail-list-ul li {
+    float: left;
+    width: 100%;
+    margin: 0 0 15px 0;
+    padding: 0; list-style-type: none;
+}
+.user-detail-right .site-detail-list-ul li label {
+    float: left;
+    width: 100%;
+    font-size: 16px;
+    color: #46484e;
+}
+.user-detail-right .site-detail-list-ul li span {
+    float: left;
+    width: 100%;
+    font-size: 13px;
+    color: #fff;
+}
+.accept-button{
+    line-height: 59px !important;
+    font-size: 20px;
+    color: #fff !important;
+    background: #00c853 !important;
+}
+.reject-button {
+    line-height: 59px !important;
+    font-size: 20px;
+    color: #fff !important;
+    background: #f82703 !important;
+}
+.accept-button i, .reject-button i {font-size: 20px !important;}
+
+</style>
+<md-dialog aria-label="About" ng-cloak class="dialog-box">
+ <md-dialog-content>
+  <div layout="row" flex class="md-padding" >
+   <div class="user-detail-left" flex="30">
+    <span class="calling-span">Calling</span>
+    <span class="user-pic-span"><img id="about" src="../app/assets/img/UserPlaceholder.png" alt="" /></span>
+    <h3 class="user-name-h3">{{vm.currentConnectedUser.creator}}</h3>
+   </div>
+   <div class="user-detail-right" flex="70">
+    <div class="site-detail-list">
+     <ul class="site-detail-list-ul">
+      <li>
+       <label>Site Name</label>
+       <span>{{projectTask.siteName}}</span>
+      </li>
+      <li>
+       <label>Work Order No.</label>
+       <span>{{projectTask.workOrderName}}</span>
+      </li>
+      <li>
+       <label>Task Name</label>
+       <span>{{projectTask.name}}</span>
+      </li>
+     </ul>
+    </div>
+    <div class="accpt-rej-btns">
+     <button class="md-fab md-primary md-button md-ink-ripple accept-button" ng-click="onAcceptIncomingCall()" type="button" aria-label="Use Android"><i class="zmdi zmdi-phone"></i>
+     <button class="md-fab md-primary md-button md-ink-ripple reject-button" ng-click="onRejectIncomingCall()" type="button"  aria-label="Use Android"><i class="zmdi zmdi-phone-end"></i></button></button>
+    </div>
+   </div>
+
+  </div>
+ </md-dialog-content>
+</md-dialog>

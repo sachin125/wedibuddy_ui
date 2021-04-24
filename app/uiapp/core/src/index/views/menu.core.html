@@ -1,0 +1,68 @@
+<aside class="sidebar" ng-controller="MenuController as menuCtrl">
+    <nav class="sidebar-nav">
+        <ul class="metismenu" id="menu">
+            <li style="float:left;" ng-repeat="menu in menuCtrl.menus" ng-class="{active: currentactivetab === menu.href}"> <a href="javascript:void()" aria-expanded="{{menu.ariaExpanded}}" ui-sref="{{menu.childrens.length  ? '.' : menu.href}}({{menu.viewid ? ({'formId' : menu.viewid}) : ''}})" ng-click="callBlurEventOfGlobalSearch();$event.stopPropagation();">
+				<span class="sidebar-nav-item-icon zmdi" ng-class="menu.icon"></span>
+				<span class="sidebar-nav-item">{{menu.name|translate}} <span class="badge white-fg" ng-if="ProjectCount && menu.href==='dashboard.ProjectsSmc'&& !(is_smc_admin || isManagerViewer) ">{{ProjectCount}}</span><span class="badge white-fg" ng-if="TaskCount && menu.href==='dashboard.taskListSmc' && !(is_smc_admin || isManagerViewer) ">{{TaskCount}}</span></span>
+				<span ng-if="menu.childrens.length" class="zmdi zmdi-chevron-right arrow"></span>
+			</a>
+                <!-- first child -->
+                <ul ng-if="menu.childrens.length" ng-repeat="firstchildren in menu.childrens">
+                    <li ng-class="{active: currentactivetab === firstchildren.href}">
+                        <a href="javascript:void()" aria-expanded="{{firstchildren.ariaExpanded}}" ui-sref="{{firstchildren.childrens.length  ? '.' : firstchildren.href}}" ng-click="callBlurEventOfGlobalSearch();$event.stopPropagation();">
+                            <!--
+							<span class="sidebar-nav-item-icon zmdi" ng-class="menu.icon"></span>
+--><span class="sidebar-nav-item">{{firstchildren.name|translate}}</span> <span ng-if="firstchildren.childrens.length" class="zmdi zmdi-chevron-right arrow"></span> </a>
+                        <!-- second child start-->
+                        <ul ng-if="firstchildren.childrens.length" ng-repeat="secondchildren in firstchildren.childrens">
+                            <li ng-class="{active: currentactivetab === secondchildren.href}">
+                                <a href="javascript:void()" aria-expanded="{{secondchildren.ariaExpanded}}" ui-sref="{{secondchildren.childrens.length  ? '.' : secondchildren.href}}">
+                                    <!--
+								<span class="sidebar-nav-item-icon zmdi"  ng-class="menu.icon"></span>
+--><span class="sidebar-nav-item">{{secondchildren.name|translate}}</span> <span ng-if="secondchildren.childrens.length" class="zmdi zmdi-chevron-right arrow"></span> </a>
+                                <!-- third child start-->
+                                <ul ng-if="secondchildren.childrens.length" ng-repeat="thirdchildren in secondchildren.childrens">
+                                    <li ng-class="{active: currentactivetab === thirdchildren.href}">
+                                        <a href="javascript:void()" aria-expanded="{{thirdchildren.ariaExpanded}}" ui-sref="{{thirdchildren.childrens.length  ? '.' : thirdchildren.href}}">
+                                            <!--
+										<span class="sidebar-nav-item-icon zmdi" ng-class="menu.icon"></span>
+--><span class="sidebar-nav-item">{{thirdchildren.name|translate}}</span> <span ng-if="thirdchildren.childrens.length" class="zmdi zmdi-chevron-right arrow"></span> </a>
+                                        <!--Fourth child start-->
+                                        <ul ng-if="thirdchildren.childrens.length" ng-repeat="fourthchildren in thirdchildren.childrens">
+                                            <li ng-class="{active: currentactivetab === fourthchildren.href}">
+                                                <a href="javascript:void()" aria-expanded="{{fourthchildren.ariaExpanded}}" ui-sref="{{fourthchildren.childrens.length  ? '.' : fourthchildren.href}}">
+                                                    <!--
+										<span class="sidebar-nav-item-icon zmdi" ng-class="menu.icon"></span>
+--><span class="sidebar-nav-item">{{fourthchildren.name|translate}}</span> <span ng-if="fourthchildren.childrens.length" class="zmdi zmdi-chevron-right arrow"></span> </a>
+                                                <ul ng-if="fourthchildren.childrens.length" ng-repeat="fifthchildren in fourthchildren.childrens">
+                                                    <li ng-class="{active: currentactivetab === fifthchildren.href}">
+                                                        <a href="javascript:void()" aria-expanded="{{fifthchildren.ariaExpanded}}" ui-sref="{{fifthchildren.childrens.length  ? '.' : fifthchildren.href}}">
+                                                            <!--
+										<span class="sidebar-nav-item-icon zmdi" ng-class="menu.icon"></span>
+--><span class="sidebar-nav-item">{{fifthchildren.name|translate}}</span> <span ng-if="fifthchildren.childrens.length" class="zmdi zmdi-chevron-right arrow"></span> </a>
+                                                        <ul ng-if="fifthchildren.childrens.length" ng-repeat="sixthchildren in fifthchildren.childrens">
+                                                            <li ng-class="{active: currentactivetab === sixthchildren.href}">
+                                                                <a href="javascript:void()" aria-expanded="{{sixthchildren.ariaExpanded}}" ui-sref="{{sixthchildren.childrens.length  ? '.' : sixthchildren.href}}">
+                                                                    <!--
+											<span class="sidebar-nav-item-icon zmdi" ng-class="menu.icon"></span>
+	--><span class="sidebar-nav-item">{{sixthchildren.name|translate}}</span> <span ng-if="sixthchildren.childrens.length" class="zmdi zmdi-chevron-right arrow"></span> </a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <!--Fourth child end-->
+                                    </li>
+                                </ul>
+                                <!-- third child end-->
+                            </li>
+                        </ul>
+                        <!-- second child end-->
+                    </li>
+                </ul>
+                <!-- first child end-->
+            </li>
+        </ul>
+    </nav>
+</aside>

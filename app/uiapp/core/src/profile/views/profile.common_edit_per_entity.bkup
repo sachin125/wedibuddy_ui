@@ -1,0 +1,345 @@
+<style>
+.active {
+  background-color: #ccc;
+}
+
+.left-align{
+text-align: left;	
+}
+.bottom-border { border-bottom: 1px solid grey; height: 50px;}
+.tableWidthAndBorder{ width:100%; border-collapse: collapse;}
+
+</style>
+<div layout="column" flex="60">
+	<div layout="row">
+		<md-card class="sd-card" flex="25" >
+				<img style="max-height: 300px;max-width: 300px;" height="300px" src="../app/assets/img/user.jpg" onerror="this.src='../app/assets/img/user.jpg'"/>
+		</md-card>
+		<div flex="75">
+			<md-card class="sd-card" layout="column" layout-align="start stretch" flex style="height: 300px;padding: 8px;">
+				<h1 style="color: #3f51b5;">{{user.firstname}} {{user.lastname}}</h1>
+				<md-divider></md-divider>
+				<h3>{{work.position}} at {{work.organization}}</h3>
+				<md-divider></md-divider>
+				<h3>Studied {{education.coursename}} <span ng-if="education.address">at {{education.address.name}} {{education.address.city}} {{education.address.state}}</span></h3>
+				<md-divider></md-divider>
+				<h3 ng-if="userProfile.currentAddress"><span>Lives in {{userProfile.currentAddress.name}} {{userProfile.currentAddress.city}} {{userProfile.currentAddress.state}}</span></h3>
+				<md-divider></md-divider>
+			</md-card>	
+		</div>		
+	</div>
+	<md-divider></md-divider>
+	<div>
+		<div flex style="margin-left:8px;margin-right:8px;">
+			<md-toolbar layout="row" style="background-color: white;">
+				<div class="md-toolbar-tools">
+				  <h2 class="md-flex" style="color:black;">About</h2>
+				</div>
+			  </md-toolbar>
+		</div>
+		<div flex layout="row" ng-init="activeTab=1">
+			<md-card class="sd-card" layout="column" layout-align="start stretch" flex="20">
+				<div  layout="column" layout-align="start start" flex>
+					<div ng-class="{'active': activeTab===1}" style="width:100%">
+						<md-button class="left-align" ng-click="activeTab=1">Personal Info</md-button>
+					</div>
+					<div class="label" ng-class="{'active': activeTab===2}" style="width:100%">
+						<md-button class="left-align" ng-click="activeTab=2">Family</md-button>
+					</div>
+					<div class="label" ng-class="{'active': activeTab===3}" style="width:100%">
+						<md-button class="left-align" ng-click="activeTab=3">Education</md-button>
+					</div>
+					<div class="label" ng-class="{'active': activeTab===4}" style="width:100%">
+						<md-button class="left-align" ng-click="activeTab=4">Work</md-button>
+					</div>
+				</div>
+			</md-card>	
+				<md-card class="sd-card" layout="column" layout-align="start stretch" flex="80">
+				<div class="wrapper"  flex>	
+					<md-content layout-padding flex class="content">
+<!--
+						Personal Info
+-->
+						<div ng-if="activeTab===1">
+							<div flex layout="row">
+								<h3 flex>Personal Info</h3>
+								<md-button md-no-ink class="md-primary" ng-click="editProfile('PersonalInformation');" ng-if="!IsPersonalInformationEditable">Edit</md-button>
+								<div ng-if="IsPersonalInformationEditable">
+									<md-button md-no-ink class="md-primary" ng-click="cancelEditProfile('PersonalInformation');" >Cancel</md-button>
+									<md-button md-no-ink class="md-primary" ng-click="saveProfile('PersonalInformation');" >Save</md-button>
+								</div>
+							</div>
+								<table flex class="tableWidthAndBorder">
+										<tr class="bottom-border" ng-init="IsEditButtonClickedForName=false;">
+											<td><label>Name: {{IsEditButtonClickedForName}}</label> </td>
+											<td>
+												<div ng-show="!IsEditButtonClickedForName">
+													{{user.firstname}} {{user.lastname}}
+												</div>
+												<div ng-show="IsEditButtonClickedForName">
+													 <md-input-container class="md-block" flex>
+														<label>FirstName</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.user.firstname" >
+													</md-input-container>
+													<md-input-container class="md-block" flex>
+														<label>Lastname</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.user.lastname" >
+													</md-input-container>
+													<md-button md-no-ink class="md-primary" ng-click="" ng-show="IsEditButtonClickedForName" >Save</md-button>
+												</div>
+											</td>
+											<td>
+												<div layout="column">
+													<md-button class="md-primary" ng-click="IsEditButtonClickedForName=!IsEditButtonClickedForName">
+														<span ng-show="!IsEditButtonClickedForName" >Edit</span>
+														<span ng-show="IsEditButtonClickedForName" >Cancel</span>
+													</md-button>
+													<md-button md-no-ink class="md-primary" ng-click="" ng-show="IsEditButtonClickedForName" >Save</md-button>
+												</div>
+											</td>
+										</tr>
+										<tr class="bottom-border" ng-init="IsEditButtonClickedForDob=false;">
+											<td><label>DOB:</label> </td>
+											<td>
+												<div ng-show="!IsEditButtonClickedForDob">
+													{{user.dob | date:'MMM d, y h:mm:ss a'}}
+												</div>
+											</td>
+											<td>
+												<div layout="column">
+													<md-button class="md-primary" ng-click="IsEditButtonClickedForDob=!IsEditButtonClickedForDob">
+														<span ng-show="!IsEditButtonClickedForDob" >Edit</span>
+														<span ng-show="IsEditButtonClickedForDob" >Cancel</span>
+													</md-button>
+													<md-button md-no-ink class="md-primary" ng-click="" ng-show="IsEditButtonClickedForDob" >Save</md-button>
+												</div>
+											</td>
+										</tr>
+										
+										<tr class="bottom-border" ng-init="IsEditButtonClickedForContactNo=false;">
+											<td><label>Contactno: {{IsEditButtonClickedForContactNo}}</label> </td>
+											<td>
+												<div ng-if="!IsEditButtonClickedForContactNo">
+													{{user.contactno || "--"}}
+												</div>
+												<div ng-if="IsEditButtonClickedForContactNo">
+													 <md-input-container class="md-block" flex>
+														<label>ContactNo</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.user.contactno" >
+													</md-input-container>
+												</div>
+											</td>
+											<td>
+												<div layout="column">
+													<md-button class="md-primary" ng-click="IsEditButtonClickedForContactNo=!IsEditButtonClickedForContactNo">
+														<span ng-show="!IsEditButtonClickedForContactNo" >Edit</span>
+														<span ng-show="IsEditButtonClickedForContactNo" >Cancel</span>
+													</md-button>
+													<md-button md-no-ink class="md-primary" ng-show="IsEditButtonClickedForContactNo" ng-click="">Save</md-button>
+												</div>
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Email ID:</label> </td>
+											<td>
+												<div ng-if="!IsPersonalInformationEditable">
+													{{user.username || "--"}}
+												</div>
+												<div ng-if="IsPersonalInformationEditable">
+													<md-input-container class="md-block" flex>
+														<label>Username</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.user.username" >
+													</md-input-container>
+												</div>
+											</td>
+										</tr>
+<!--
+										<tr class="bottom-border">
+											<td><label>Facebook ID:</label> </td>
+											<td>
+												<div ng-if="!IsPersonalInformationEditable">
+													{{user.facebookId || "--"}}
+												</div>
+												<div ng-if="IsPersonalInformationEditable">
+													<md-input-container class="md-block" flex>
+														<label>FacebookId</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.user.facebookId" >
+													</md-input-container>
+												</div>
+											</td>
+										</tr>
+-->
+										<tr class="bottom-border">
+											<td>
+												Height:
+											</td>
+											<td>
+												<div ng-if="!IsPersonalInformationEditable">
+													{{user.height || "--"}}
+												</div>
+												<div ng-if="IsPersonalInformationEditable">
+												 <md-input-container class="md-block" flex>
+													<label>Height</label>
+													<input ng-model="editUserWithAssociateObjectWrapper.user.height" >
+												</md-input-container>
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Current Location:</label> </td>
+											<td>
+												<div ng-if="!IsPersonalInformationEditable">
+													<span ng-if="!userProfile.currentAddress">--</span>
+													<span ng-if="userProfile.currentAddress">{{userProfile.currentAddress.name}} {{userProfile.currentAddress.city}} {{userProfile.currentAddress.state}}</span>
+												</div>
+												<div ng-if="IsPersonalInformationEditable">
+													<md-input-container class="md-block" flex>
+														<label>Name</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.userProfile.currentAddress.name" >
+													</md-input-container>
+													<md-input-container class="md-block" flex>
+														<label>City</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.userProfile.currentAddress.city" >
+													</md-input-container>
+													<md-input-container class="md-block" flex>
+														<label>State</label>
+														<input ng-model="editUserWithAssociateObjectWrapper.userProfile.currentAddress.state" >
+													</md-input-container>
+												</div>
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Education:</label></td>
+											<td>
+												{{user.education.name || "--"}}
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Work:</label> </td>
+											<td>{{user.work.position || "--"}}</td>
+										</tr>
+								</table>
+							
+						</div>
+<!--
+						Family
+-->
+						<div ng-if="activeTab===2">
+									<table flex class="tableWidthAndBorder">
+										<tr class="bottom-border">
+												<td><label>Father:</label></td>
+												<td>{{family.fatherfirstname}} {{family.fatherlastname}}</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>Mother:</label></td>
+												<td>{{family.motherfirstname}} {{family.motherlastname}}</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>Father occupation:</label></td>
+												<td>{{family.fatherOccupation || "--"}}</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>Mother occupation:</label></td>
+												<td>{{family.motherOccupation || "--"}}</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>Deity:</label></td>
+												<td>{{family.deity.name || "--"}}</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>Goutra:</label></td>
+												<td>{{family.goutra.name || "--"}}</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>Home Telephone:</label></td>
+												<td>{{family.homeContactno || "--"}}</td>
+											</tr>
+											<tr class="bottom-border">
+												<td><label>HomeTown:</label></td>
+												<td>
+													<span ng-if="!family.homeAddress">--</span>
+													<span ng-if="!family.homeAddress">{{family.homeAddress.name}} {{family.homeAddress.city}} {{family.homeAddress.state}}</span>
+												</td>
+											</tr>
+											<tr class="bottom-border">
+												<td>Nanihal</td>
+												<td>{{family.nanihal || "--"}}</td>
+											</tr>
+									</table>
+						</div>
+<!--
+						Education
+-->
+						<div ng-if="activeTab===3">
+								<table class="tableWidthAndBorder" ng-repeat="educationObj in educationList">
+										<tr class="bottom-border">
+											<td><label>Course:</label></td>
+											<td>{{educationObj.coursename || "--"}}</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Level:</label></td>
+											<td>{{educationObj.educationLevel || "--"}}</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Address:</label></td>
+											<td>
+												<div ng-if="!educationObj.address">--</div>
+												<div ng-if="!educationObj.address">{{educationObj.address.name}} {{educationObj.address.city}} </div>
+												<div>{{educationObj.address.state}}</div>
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Time period:</label></td>
+											<td>
+												<div>{{educationObj.fromDate | date:'fullDate'}} </div> 
+												<label><b>To</b></label> 
+												<div>{{educationObj.toDate | date:'fullDate'}}</div>
+											</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Description:</label></td>
+											<td>{{educationObj.description || "--"}}</td>
+										</tr>
+								</table>
+								<div ng-if="educationList.length==0">
+									No Data Available
+								</div>
+							</md-table-container>
+						</div>
+<!--
+						Work
+-->
+						<div ng-if="activeTab===4">
+							<md-table-container >
+								<table class="tableWidthAndBorder" md-table ng-repeat="workObj in workList">
+										<tr class="bottom-border">
+											<td><label>Position:</label></td>
+											<td>{{workObj.position || "--"}}</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Organization:</label></td>
+											<td>{{workObj.organization || "--"}}</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Address:</label></td>
+											<td>{{workObj.address.name}}  {{workObj.address.city}} {{workObj.address.state}}</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Time period:</label></td>
+											<td>{{workObj.fromDate  | date:'fullDate'}} <label><b>To</b></label> {{workObj.toDate   | date:'fullDate'}}</td>
+										</tr>
+										<tr class="bottom-border">
+											<td><label>Description:</label></td>
+											<td>{{workObj.description || "--"}}</td>
+										</tr>
+								</table>
+								<div ng-if="workList.length==0">
+									No Data Available
+								</div>
+							</md-table-container>
+						</div>
+					</md-content>
+				</div>
+			</md-card>	
+		</div>
+	</div>
+</div>

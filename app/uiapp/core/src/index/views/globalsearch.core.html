@@ -1,0 +1,271 @@
+<style>
+    .site-hed-search md-autocomplete-wrap {
+        box-shadow: none !important;
+    }
+    
+    .site-hed-search md-autocomplete-wrap input {
+        border: 0px solid #ccc !important;
+        min-height: 39px;
+        padding-left: 30px;
+        background-color: transparent;
+        font-size: 16px;
+    }
+    
+    .site-hed-search md-autocomplete-wrap button {
+        display: none;
+    }
+    
+    .site-hed-search-icon {
+        position: absolute;
+        left: -22px;
+        top: 0;
+        z-index: 9;
+    }
+    .md-list-item-text {
+     margin:  0 !important;
+}
+.custom-search-p {
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0;
+  color: rgba(66, 66, 66, 0.65);
+}
+md-toolbar.sd-app-toolbar {
+    z-index: 99;
+}
+
+.custom-search-p {
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0;
+  color: rgba(66, 66, 66, 0.65);
+}
+md-toolbar.sd-app-toolbar {
+    z-index: 99;
+}
+
+.highlight {
+	color: black;
+	background: #eee;
+	border-radius: 2px;
+	margin: -1px;
+}
+
+/*.md-subheader .md-subheader-inner
+{
+	background-color: #fff;
+    padding: 7px 10px 7px 0 !important;;
+    cursor: pointer;
+}*/
+
+.sticky1 .md-subheader-inner
+{
+	    padding-top: 0px !important;
+    margin-top: 0px !important;
+}
+
+.stuff-to-show {
+  position: relative;
+  height: 10px;
+  -webkit-transition: top linear 0.5s;
+  transition: top linear 0.5s;
+  top: 0;
+}
+.stuff-to-show.ng-hide {
+  top: -10px;
+}
+.stuff-to-show.ng-hide-add,
+.stuff-to-show.ng-hide-remove {
+  display: block!important;
+}
+
+.listItemStyle{
+	 height: 50px !important;
+    line-height: 16px !important;
+    min-height: 50px !important;
+}
+
+md-list-item.listItemStyle.md-3-line > .md-no-style{
+	min-height: 50px !important;
+}
+md-list-item.md-3-line::before, md-list-item.md-3-line > .md-no-style::before {
+    min-height: 50px !important;
+}
+
+.global-search-listing { float:left; width:100%;}
+.global-search-listing ul { margin: 0; padding: 0; float:left; width:100%;}
+.global-search-listing ul li { margin: 0; padding: 10px; list-style-type: none; float:left; width:100%; border-bottom: 1px solid #eee; outline:none;}
+.global-search-listing ul li:hover {background:#f3f3f3; }
+.global-search-listing ul li .md-list-item-text p {margin: 0; padding: 0; float:left; width:100%;}
+
+
+.custom-class-button-search {
+	
+	    color: #daefff !important;
+    margin-top: 30px !important;
+    margin-right: -2px !important;
+    border-bottom: 1px solid rgb(169, 215, 252) !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    min-height: 34px !important;
+    height: 34px !important;
+}
+.md-data-table-input.widget-name-col input::-webkit-input-placeholder { / Chrome/Opera/Safari /
+  color: #fff !important;
+}
+.md-data-table-input.widget-name-col input::-moz-placeholder { / Firefox 19+ /
+  color: #fff !important;
+}
+.md-data-table-input.widget-name-col input:-ms-input-placeholder { / IE 10+ /
+  color: #fff !imporatant;
+}
+.md-data-table-input.widget-name-col input:-moz-placeholder { / Firefox 18- /
+  color: #fff !important;
+}
+.global-search-listing .md-no-sticky.md-subheader {background-color: #fff !important; border-bottom: 1px solid #e1e1e1; cursor: pointer;}
+.global-search-listing .md-no-sticky.md-subheader .md-subheader-inner {padding: 10px 5px; font-size: 13px;}
+.global-search-listing .md-no-sticky.md-subheader .md-subheader-inner .md-subheader-content span { line-height: 17px;}
+#globalSearchForm md-content .md-no-sticky.md-subheader {background-color: rgb(255, 255, 255) !important;}
+#globalSearchForm md-content .md-no-sticky.md-subheader .md-subheader-inner {padding: 10px 5px;}
+</style>
+<div class="top-searchBar-hed">
+    <div class="md-table-more-toolbar" ng-show="filter.show">
+        <md-toolbar  class="md-table-toolbar md-default" layout="row" layout-align="center center" style="background: #2196f3;">
+            <div class="md-toolbar-tools" style="padding-right: 0;">
+                <form id="globalSearchForm" layout="row" name="filter.form" class="flex">
+	
+	     <md-button  class="md-icon-button custom-class-button-search" ng-if="changeToGlobal || changeTodoc" >
+                   
+                    <i class="material-icons md-dark zmdi zmdi-search-for"  ng-if="changeToGlobal" style="color: rgb(255, 255, 255); !important;" ></i>
+                     <i class="material-icons md-dark zmdi zmdi-collection-text" ng-if="changeTodoc"  style="color: rgb(255, 255, 255); !important;" ></i>
+     </md-button> 
+    <md-input-container class="md-data-table-input widget-name-col md-block flex " flex style="margin: 8% 0 0 0;" md-no-float>
+      <label style="color: #daefff;">Search</label>
+      <input style=" border-bottom: 1px solid rgb(169, 215, 252); color: rgb(255, 255, 255) !important;padding-right:19px" class="searchTextVal "  ng-model="searchText" regex-pattern="(^[a-zA-Z0-9_. \-]+$)" ng-keyup="checkForEnterAndNlpSearch($event)" ng-blur="removeResults();" autocomplete="off">
+
+	<md-progress-linear ng-if="searchText.length > 2 && !changeToNLP" style="position: absolute;margin-top: 32px;width: 99%" md-mode="indeterminate" value="searchResult"></md-progress-linear>
+
+    </md-input-container>
+    
+    <md-content data-mcs-theme="dark" ng-if="!noData && showResult && searchText.length > 2" class="md-whiteframe-10dp" id="globalSearchId" style="width: 94%;position: absolute;right: 0;top: 52px;padding: 10px;max-height: 400px;background-color: rgb(255, 255, 255);" ng-if="searchResult !== {} && showResult">
+		
+		<div class="global-search-listing" ng-repeat="(key,val) in searchResult">
+			<md-subheader class="md-no-sticky" style="background-color: #fff;border-bottom: 1px solid #e1e1e1;cursor: pointer;" ng-init="toggleIcon=false;" ng-click="toggleIcon = !toggleIcon" style="toggleIcon ? 'background: #fff;' : 'background: rgb(33, 150, 243);'">
+            
+				<span style="color: rgba(0, 145, 234)"><span style="color: rgba(0, 145, 234, 0.65)">{{key}} ( {{val.length}} )</span>
+				<i style="line-height: 17px; position: absolute; right: 0px;" class="zmdi" ng-class="toggleIcon ? 'zmdi-chevron-up' : 'zmdi-chevron-down'"></i>
+				</span>
+			</md-subheader>
+			<ul>
+				<li ng-repeat="item in val" class="auto_site md-3-line" ng-click="getDetailForGlobalSearchData(item,changeTodoc);goToDocDetails1(searchText,changeTodoc);closeFilter();"  ng-show="toggleIcon">
+					<div class="md-list-item-text" layout="row" flex="100">
+					  <div flex="70">
+						<h1 md-highlight-text="searchText" style="font-size: 14px; margin: 0;color: rgba(35, 34, 34, 0.87); padding: 0; line-height: 15px;">{{item.mainId}}
+						</h1>
+						<p md-highlight-text="searchText" style="font-size:13px;">{{ item.mainName | HtmlDecodeFilterCore | FormatStringEllipsisFilterCore:45 }} </p><md-tooltip md-direction="top" ng-if="item.mainName.length > 45" md-direction="top">{{ item.mainName | HtmlDecodeFilterCore}}</md-tooltip>
+					  </div>
+					  <div flex="30">
+						<h1 md-highlight-text="searchText" style="color: rgba(35, 34, 34, 0.87);">{{item.subId}} </h1><span style="display: block;color: #757575;font-size: 13px;">{{item.subName | HtmlDecodeFilterCore | FormatStringEllipsisFilterCore:15}}</span>
+						<md-tooltip md-direction="top" ng-if="item.subName.length > 15" md-direction="top">{{ item.subName| HtmlDecodeFilterCore}}</md-tooltip>
+					  </div>
+					
+				  </div>
+				</li>
+			</ul>
+			
+		</div>
+		
+
+     </md-content>
+    <md-content data-mcs-theme="dark"  class="md-whiteframe-10dp" id="globalSearchId" style="width: 94%;position: absolute;right: 0;top: 52px;padding: 10px;max-height: 400px;background-color: rgb(255, 255, 255);" ng-if="searchNLPResult.length>0 && showResult">
+		
+		<div class="global-search-listing" ng-repeat="(key,val) in searchNLPResult">
+			<md-subheader class="md-no-sticky" ng-init="toggleIcon=false;" ng-click="goToNlpSearchResult(val)" style="toggleIcon ? 'background: #fff;' : 'background: rgb(33, 150, 243);'">
+				<span>{{val.sentence | HtmlDecodeFilterCore}} ( {{val.counts}} )</span>
+			</md-subheader>
+						
+		</div>
+		
+
+     </md-content>
+     <md-content data-mcs-theme="dark" ng-if="noData && showResult && searchText.length > 2 && !changeToNLP" class="md-whiteframe-10dp" id="globalSearchId" style="width: 94%;position: absolute;right: 0;top: 52px;padding: 10px;max-height: 400px;background-color: rgb(255, 255, 255);" ng-if="searchResult !== {} && showResult">
+     <div ng-cloak style="padding-top: 0px;padding-bottom: 0px;margin-top: 0px;margin-bottom: 0px;">
+			<md-subheader class="md-no-sticky">
+				<span>
+					 No results found for <b>{{searchText}}</b>
+				 </span>
+			</md-subheader>
+		</div>
+		</md-content>
+<!--
+		
+     <md-button  class="md-icon-button" style=" color: #daefff !important; position: absolute; right: 29px;top:12px;">
+                    <i class="material-icons md-dark zmdi zmdi-collection-text" ng-if="!changeTodoc" style="color: #c2ddf1" ng-click="callToChangedData(searchText,true);" ></i>
+                    <i class="material-icons md-dark zmdi zmdi-collection-text"  ng-if="changeTodoc" style="color: rgb(255, 255, 255); !important;" ng-click="callToChangedData(searchText,false);"></i>
+                    <md-tooltip md-direction="top"md-direction="top">Documents</md-tooltip>
+     </md-button> 
+     <md-button  class="md-icon-button" style="color: #daefff !important;position: absolute;right: 61px;top: 13px;">
+                    <i class="material-icons md-dark zmdi zmdi-search-for" ng-if="!changeToNLP" style="color: #c2ddf1" ng-click="callToNLPSearch(searchText,true);" ></i>
+                    <i class="material-icons md-dark zmdi zmdi-search-for"  ng-if="changeToNLP" style="color: rgb(255, 255, 255); !important;" ng-click="callToNLPSearch(searchText,false);"></i>
+                    <md-tooltip md-direction="top"md-direction="top">NLP Search</md-tooltip>
+     </md-button> 
+-->
+<!--
+     <md-button ng-if="changeTodoc" class="md-icon-button" style=" color: #daefff !important; position: absolute; right: -10px;top:12px" >
+                    <i class="material-icons md-dark zmdi zmdi-close"></i>
+     </md-button> 
+-->
+
+<!--
+      <md-button  class="md-icon-button" style=" color: #daefff !important; position: absolute; right: -10px;top:12px" ng-click="closeFilter();">
+                   
+                    <i class="material-icons md-dark zmdi zmdi-close"></i>
+     </md-button>  
+-->
+	<md-menu md-offset="0 40" class="custom-menu-class" style="right: -10px;top: 16px;position: absolute;">
+      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="openTableMenu($mdOpenMenu, $event)">
+        <md-icon style="color:#fff;" class="zmdi zmdi-caret-down"></md-icon>
+      </md-button>
+      <md-menu-content  class="global-search-menu-icon" width="3">
+        <md-menu-item  ng-click="callToGlobalSearch(searchText,true);">
+          <md-button >
+            <md-icon class="zmdi zmdi-search-for"></md-icon>
+			Global
+          </md-button>
+        </md-menu-item>
+        <md-menu-divider></md-menu-divider>
+        <md-menu-item ng-click="callToChangedData(searchText,true);">
+          <md-button >
+            <md-icon class=" zmdi zmdi-collection-text"></md-icon>
+			Document
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
+	
+  </div>
+               
+</form>
+    </div>
+    </md-toolbar>
+    <div class="topHed-search-btns">
+		
+	
+    <md-button style="margin-right: -7px !important;" class="md-icon-button" ng-show="!filter.show" ng-click="filter.show=true; clearFilter();$mdAutocompleteCtrl.clear($event)" >
+        <md-tooltip md-direction="left">Search</md-tooltip>
+        <md-icon aria-label="Menu" class="zmdi zmdi-search material-icons"></md-icon>
+    </md-button>
+    <md-button style="margin-right: -7px !important;" class="md-icon-button" ng-show="filter.show" ng-click="closeFilter();" >
+        <md-tooltip md-direction="left">close</md-tooltip>
+        <md-icon aria-label="Menu" class="zmdi zmdi-close material-icons"></md-icon>
+    </md-button>
+<!--
+    <md-button class="md-icon-button" ng-show="filter.show" ng-click="nlpSearch();" style="margin-right: -7px !important;">
+        <md-tooltip md-direction="left">Search</md-tooltip>
+        <md-icon aria-label="Menu" class="zmdi zmdi-search material-icons"></md-icon>
+    </md-button>
+-->
+
+    </div>
+</div>

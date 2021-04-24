@@ -1,0 +1,51 @@
+<md-dialog aria-label="Assign Solution Partner" ng-cloak style="min-width: 810px;">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2><span translate="Upload Image"></span></h2> <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close" class="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <form name="uploadForm">
+                    <div id="dropbox" class="dropboxmodal" layout="column" layout-fill layout-align="center center" ngf-drop="setFiles($files)" ng-model="files" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="false">
+                        <p style="color:red">{{message}}</p>
+                        <div class="dropboxmodalwrapper"> <i class="zmdi zmdi-cloud-upload"></i> <span class="md-headline"><span translate="Drop Image to Upload"></span></span>
+                            <div layout-padding>
+                                <md-button class="md-raised md-primary md-status-button" ngf-select="setFiles($files)" ngf-multiple="true"><span translate="Browse"></span></md-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropboxbottomtext" layout="row">
+                        <div flex class="md-body-1 color-54"><span translate="Supported: jpg, png"></span></div>
+                        <div class="md-body-1 color-54"><span translate="Maximum file size: 5MB"></span></div>
+                    </div>
+                    <div class="dropboxbottomtext text-center" layout="row"> </div>
+                    <div ng-show="files.length">
+                        <md-list class="sd-list">
+                            <md-list-item class="md-2-line" ng-repeat="file in files"> <img ng-src="{{fileType}}" class="md-avatar" alt="{{'Material Issue.pdf'}}" />
+                                <div class="md-list-item-text" layout="column">
+                                    <h4>{{ file.name }}</h4>
+                                    <p ng-switch="file.size > 1024*1024"> <span ng-switch-when="true">{{file.size / 1024 / 1024 | number:2}} MB</span> <span ng-switch-default>{{file.size / 1024 | number:2}} kB</span> </p>
+                                </div>
+                                <md-button class="md-icon-button" ng-click="remove($event)" aria-label="Remove File">
+                                    <md-icon aria-label="Remove File" class="zmdi zmdi-delete"></md-icon>
+                                </md-button>
+                            </md-list-item>
+                        </md-list>
+                        <div ng-show="progressVisible">
+                            <md-progress-linear md-mode="determinate" value="{{progress}}"></md-progress-linear>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row"> <span flex></span>
+            <md-button class="md-raised md-primary md-status-button" ng-click="cancel()"><span translate="Cancel"></span></md-button>
+            <md-button class="md-raised md-primary md-status-button" ng-disabled="files==''" ng-click="uploadAttachment(files,myFile)" style="margin-left:8px; margin-right:20px;"><span translate="Upload"></span></md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

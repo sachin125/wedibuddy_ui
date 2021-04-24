@@ -1,0 +1,58 @@
+<md-dialog aria-label=Change Preference" ng-cloak style="min-width: 810px;">
+  <form ng-submit="disabled=true" name="change_preference_dialog">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Change Preferences</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon aria-label="change" class="zmdi zmdi-close"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <div class="siteinputvaluesection">
+          <div class="siteinputrow nomargin" layout="row" layout-align="space-between start">
+         
+            <md-input-container flex="50" class="md-block">
+              <label>Limit Per Page </label>
+              <md-select placeholder="Limit Per Page" ng-model="initialLimitPerPage" name="initialLimitPerPage">
+                <md-option ng-repeat="limitPerPage in limitPerPageList" value="{{limitPerPage}}">
+                  {{limitPerPage}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container flex="50" class="md-block">
+              <label>Date Format </label>
+              <md-select placeholder="Date Format" ng-model="dateFormat" name="dateFormat">
+                <md-option ng-repeat="dateFormat in dateFormatList" value="{{dateFormat.ACTUAL}}">
+                  {{dateFormat.TOSHOW}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            
+<!--
+            <md-input-container flex="50" class="md-block">
+              <label>Time Zone</label>
+              <md-select placeholder="Time Zone" ng-model="timeZone" name="timeZone">
+                <md-option ng-repeat="timeZone in timeZoneList" value="{{timeZone}}">
+                  {{timeZone |replaceUnderscoreFilterCore |HtmlDecodeFilterCore}}
+                </md-option>
+              </md-select>
+-->
+              
+
+            </md-input-container>
+            
+          </div>
+
+        </div>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="cancel()">Cancel</md-button>
+      <md-button ng-click="changePreferenceForUser()" style="margin-left:8px; margin-right:20px;">Change</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

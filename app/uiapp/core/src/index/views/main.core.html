@@ -1,0 +1,65 @@
+<div ng-controller="MainController as MainController">
+	<div flex layout-fill style="height: 65px;">
+		<md-content layout-fill>
+			<md-toolbar layout-fill>
+				<div layout="row" layout-align="space-around center" layout-fill>
+					<div flex="50" layout-fill layout="row" > 
+						<div flex="30">
+						</div>
+						<div layout-fill layout="row" layout-align="start center">
+							<a ui-sref="#" style="font-size: 170%;">Wedibuddy</a>
+						</div>
+					</div>
+					<div flex="50" layout-fill layout="row" layout-align="start center">
+						<md-menu-bar>
+						<md-menu >
+						  <div layout="row" layout-align="start center" ng-click="$mdOpenMenu()">
+							  <div layout="row" layout-align="start center">
+								<span><img style="border-radius: 30%;" ng-src="{{userProfileImage}}" width="35" height="40" alt="" /></span>
+								<span style="padding: 10px;"><label>{{currentUser.firstname | HtmlDecodeFilterCore}} {{currentUser.lastname | HtmlDecodeFilterCore}}</label></span>								
+							</div>
+							<md-button class="md-icon-button md-profile-button" aria-label="Profile Button">
+								<i class="zmdi zmdi-chevron-down"></i>
+							</md-button>
+						  </div>
+						  <md-menu-content width="4">
+							<md-menu-item>
+							  <md-button ng-click="gotoProfile()">
+								<div layout="row">
+								  <md-icon class="zmdi zmdi-account"></md-icon>
+								  <p flex>Profile</p>
+								</div>
+							  </md-button>
+							</md-menu-item>
+							<md-menu-item>
+							  <md-button ng-click="gotoChangePassword()">
+								<div layout="row">
+								  <md-icon class="zmdi zmdi-edit"></md-icon>
+								  <p flex>Change Password</p>
+								</div>
+							  </md-button>
+							</md-menu-item>
+							<md-menu-divider role="separator"></md-menu-divider>
+							<md-menu-item>
+							  <md-button ng-click="logout()">
+								<div layout="row">
+								  <md-icon class="zmdi zmdi-sign-in"></md-icon>
+								  <p flex>Log Out</p>
+								</div>
+							  </md-button>
+							</md-menu-item>
+						  </md-menu-content>
+						</md-menu>
+						<md-menu-bar/>
+					</div>
+				</div>
+			</md-toolbar>
+		</md-content>
+	</div>
+	<div>
+		<div data-mcs-theme="inset-2-dark" id="menuList" ng-include='menuPageTemplate'></div>
+	</div>
+	<md-content class="maincontentview anim-in-out  anim-fade" data-ng-class="$currentStateName" data-mcs-theme="inset-2-dark" data-anim-speed="1000" ui-view ui-view="mainView" md-scroll-y flex ng-cloak id="ui-view"> </md-content>
+
+</div>
+

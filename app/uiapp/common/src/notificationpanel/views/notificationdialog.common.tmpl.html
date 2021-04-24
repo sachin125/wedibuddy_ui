@@ -1,0 +1,177 @@
+<link rel="stylesheet" href="../app/assets/css/collaboration.css"/>
+<style>
+</style>
+<md-dialog aria-label="NotificationCollabs" ng-cloak flex="50" style="max-height:500px">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2><span translate="Notifications"></span></h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="cancelNotificationDailog()">
+				<md-icon aria-label="Close" class="zmdi zmdi-close" ></md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div>
+			<md-tabs  flex md-stretch-tabs="always" md-no-pagination="true">
+			<md-tab >
+				<md-tab-label>
+					<span class="count-spn-not-Popup" ng-show="ngshowvalue">{{collabCount}}</span> </md-icon>
+					 <md-button class="md-icon-button" aria-label="Settings">
+						<md-icon class="zmdi zmdi-comments">
+							<md-tooltip>{{collabCount}} <span translate="Collaboration"></span></md-tooltip>  
+								
+					</md-button>
+				</md-tab-label>
+				<md-tab-body class="md-padding">
+					<div style="width: 100%;position: relative;overflow-x:hidden;" ng-show="collabNotifications.length!=0">
+						<md-content flex="100" class="md-padding">
+							<section class="sidebar-twitt" >
+								<md-list layout-padding  class="sd-list">
+									<md-list-item class="md-3-line" ng-repeat="collabNotification in collabNotifications">
+										<div class="history-title" layout="row">
+											<span class="twitt-avatar" flex="15">
+												<img ng-src="..{{collabNotification.creator.profileImageAttach.filePath | HtmlDecodeFilterCore}}" alt ="" onerror="this.src='../app/assets/img/user.jpg'" />
+											</span>
+											<div class="user-notification-contain" flex="85">
+												<span class="top-heading">{{ collabNotification.creator.username}}</span>
+												<span class="date-time-twitt"> {{ collabNotification.createdTime | Collaborationtimestamp2dateFilterCommon}}<md-tooltip md-direction=top>{{ collabNotification.createdTime | date:'hh:mm dd MMM yyyy'}}</md-tooltip></span>
+												<div class="comme-priv-publ">
+													<span class="sub-heading-comment" compile="collabNotification.collaborationComments.comment | HtmlDecodeFilterCore"></span>
+												</div>
+												<i class="zmdi zmdi-check notific-innPopup-comment-chked gray-unread" ng-show="!collabNotification.isRead" ng-click='readCollabNotification(collabNotification,$index);'><md-tooltip md-direction="top">Read</md-tooltip></i>
+												<i class="zmdi zmdi-check notific-innPopup-comment-chked green-read" ng-show="collabNotification.isRead"><md-tooltip md-direction="top">Seen</md-tooltip></i>
+												<div class="chnl-img-col">
+													<div class="lightbox clearfix">
+														<ul class="demo">
+															<li class="chnl-img-upload" lightgallery ng-repeat="collaborationCommentAttach in collabNotification.collaborationComments.collaborationCommentImages" data-src="{{collaborationContext+collaborationCommentAttach.filePath | HtmlDecodeFilterCore}}">
+																<img src="..{{collaborationCommentAttach.filePath | HtmlDecodeFilterCore}}" />
+															</li>
+														</ul>
+													</div>
+												</div>
+												<div class="chnl-docPdf-col">		
+													<div class="chnl-docPdf-inner" ng-repeat="collaborationCommentAttach in collabNotification.collaborationComments.collaborationCommentAttach" ng-if="(collaborationCommentAttach.fileName.toLowerCase().endsWith('.xlsx') || collaborationCommentAttach.fileName.toLowerCase().endsWith('.xls') || collaborationCommentAttach.fileName.toLowerCase().endsWith('.docx') || collaborationCommentAttach.fileName.toLowerCase().endsWith('.doc') || collaborationCommentAttach.fileName.toLowerCase().endsWith('.pdf'))"  data-ng-click="downloadAttachmentInNotification(collaborationCommentAttach,$event)">	
+														<i class="zmdi zmdi-attachment-alt"></i>
+														<span style="cursor:pointer;">{{collaborationCommentAttach.fileName| HtmlDecodeFilterCore | FormatStringEllipsisFilterCore :50}}
+															<md-tooltip md-direction="top">{{collaborationCommentAttach.fileName | HtmlDecodeFilterCore}}</md-tooltip>
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
+												
+									</md-list-item>
+								</md-list>
+							</section>
+						</md-content>
+					</div>
+					<div ng-show="collabNotifications.length==0" class="noData-Show"> 
+<!--
+						<img ng-if="isLoadingDataShow" src="../app/assets/img/Sorry.png" />
+						<span>{{footerMsg}}</span>
+-->
+						<span translate="You're all caught up!"></span>
+					</div>
+				</md-tab-body>
+			  </md-tab>
+			  <md-tab >
+				  <md-tab-label>
+					  <span class="count-spn-not-Popup" ng-show="ngshowvalue">0</span> </md-icon>
+					 <md-button class="md-icon-button" aria-label="Settings">
+						<md-icon class="zmdi zmdi-portable-wifi" >
+							<md-tooltip>0 <span translate="Site"></span></md-tooltip>  
+								
+					</md-button>
+				</md-tab-label>
+				<md-tab-body class="md-padding">
+				  <div class="noData-Show"><span translate="You're all caught up!"></span></div>
+				</md-tab-body>
+			  </md-tab>
+			  <md-tab>
+				  <md-tab-label>
+					  <span class="count-spn-not-Popup" ng-show="ngshowvalue">{{projectCount}}</span> </md-icon>
+					 <md-button class="md-icon-button" aria-label="Settings" ng-click="getCollabNotificationDataForProject();">
+						<md-icon class="zmdi zmdi-assignment-check">
+							<md-tooltip>{{projectCount}} <span translate="Project"></span></md-tooltip>  
+								
+					</md-button>
+				</md-tab-label>
+				<md-tab-body class="md-padding">
+					<div style="width: 100%;position: relative;overflow-x:hidden;height:149px;overflow:auto;" ng-show="projectNotifications.length!=0">
+						<md-content flex="100" class="md-padding">
+							<section class="sidebar-twitt" >
+								<md-list layout-padding  class="sd-list">
+									<md-list-item class="md-3-line" ng-repeat="notification in projectNotifications">
+										<div class="history-title" layout="row">
+											
+											<span class="twitt-avatar" flex="15">
+												<img ng-src="..{{collabNotification.creator.profileImageAttach.filePath | HtmlDecodeFilterCore}}" alt ="" onerror="this.src='../app/assets/img/user.jpg'" />
+											</span>
+											<div class="user-notification-contain" flex="85">
+												<span>{{ notification.message}}</span>
+												
+												
+												<span class="top-heading" style="font-size: 12px !important;" ng-if="(notification.collaborationComments.commentsMapping[0].collaborationChannelId | HasValueFilterCore) || (notification.collaborationComments.commentsMapping[0].workGroupId | HasValueFilterCore)">{{ notification.creator.firstname + " "+ notification.creator.lastname}} posted</span>
+										<span class="date-time-twitt" style="margin-top: 6px;"> {{ notification.createdTime | Collaborationtimestamp2dateFilterCommon}}<md-tooltip md-direction=top>{{ notification.createdTime | PreferenceDateTimeformatFilterCore }}</md-tooltip></span>
+												
+												
+<!--
+												<span class="top-heading">{{ collabNotification.creator}}</span>
+												<span class="date-time-twitt"> {{ collabNotification.createdTime | Collaborationtimestamp2dateFilterCommon}}<md-tooltip md-direction=top>{{ collabNotification.createdTime | date:'hh:mm dd MMM yyyy'}}</md-tooltip></span>
+												<div class="comme-priv-publ">
+-->
+<!--
+													<span class="sub-heading-comment" compile="collabNotification.collaborationComments.comment | HtmlDecodeFilterCore"></span>
+												</div>
+-->
+<!--
+												<i class="zmdi zmdi-check notific-innPopup-comment-chked gray-unread" ng-show="!collabNotification.isRead" ng-click='readCollabNotification(collabNotification,$index);'><md-tooltip md-direction="top">Read</md-tooltip></i>
+												<i class="zmdi zmdi-check notific-innPopup-comment-chked green-read" ng-show="collabNotification.isRead"><md-tooltip md-direction="top">Seen</md-tooltip></i>
+												
+												
+												
+												
+-->
+												<div ng-if="notification.collaborationComments.collaborationCommentAttach.length>0" class="date-time-twitt">
+											<i class="zmdi zmdi-attachment-alt"  style="font-size: 16px; transform: rotate(15deg); margin: 4px 2px 0 0;"></i>
+										</div>
+										<div class="notification-comme-priv-publ">
+											<span class="sub-heading-comment" compile="notification.collaborationComments.comment | HtmlDecodeFilterCore" style="word-wrap: break-word;"></span>
+										</div>
+										<i class="zmdi zmdi-check notific-comment-chked gray-unread" ng-show="!notification.isRead" ng-click='readNotificationForProject(notification,$index);'><md-tooltip md-direction="top">Read</md-tooltip></i>
+									<i class="zmdi zmdi-check notific-comment-chked green-read" ng-show="notification.isRead"><md-tooltip md-direction="top"><span translate="Seen"></span></md-tooltip></i>	
+												
+												
+												</div>
+											</div>
+										</div>
+												
+									</md-list-item>
+								</md-list>
+							</section>
+					<div flex="100" class="notification-header" >
+			  <h4 class="Popup-mark-all-h4" ng-click="readAllProjectNotification()" translate="Mark all as Read"></h4>
+			</div>
+						</md-content>
+				
+					</div>
+			
+<!--
+					<div ng-show="collabNotifications.length==0" class="noData-Show"> 
+						<img ng-if="isLoadingDataShow" src="../app/assets/img/Sorry.png" />
+						<span>{{footerMsg}}</span>
+						<span translate="You're all caught up!"></span>
+					</div>
+-->
+			
+				</md-tab-body>
+				
+			  </md-tab>
+			</md-tabs>
+			<div flex="100" class="notification-header" >
+			  <h4 class="Popup-mark-all-h4" ng-click="readAllCollabNotificationDialog()" translate="Mark all as Read"></h4>
+			</div>
+		</div>
+	<md-dialog-content>
+</md-dialog>

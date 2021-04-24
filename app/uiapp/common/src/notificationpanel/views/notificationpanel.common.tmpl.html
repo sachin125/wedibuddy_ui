@@ -1,0 +1,73 @@
+<style>
+   .reject-button {
+   line-height: 59px !important;
+   font-size: 20px;
+   color: #fff !important;
+   background: #f82703 !important;
+   }
+   .chat-contain {
+   height: 440px;
+   overflow: auto;
+   }
+   .admin-notifications.md-content-notif md-tabs md-tabs-content-wrapper {top:49px !important;}
+   .disable-TransCol {
+   position: fixed;
+   top: 112px;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.3);
+   text-align: center;
+   z-index: 999;
+   }
+   .md-listChat .md-avatar {
+   margin-top: 8px;
+   margin-bottom: 8px;
+   margin-right: 16px;
+   border-radius: 50%;
+   box-sizing: content-box;
+   width: 40px;
+   height: 40px;
+   }
+   .call-ended-time{color: #F44336;}
+   .md-listChat:hover {background:rgba(158,158,158,0.2);}
+   .md-tab-Chatpannel md-tabs-canvas { height:50px !important; }
+   .md-tab-Chatpannel md-tabs-canvas md-pagination-wrapper { height:48px !important; }
+   .md-tab-Chatpannel md-tabs-content-wrapper {top:48px !important;}
+</style>
+<md-content id="notificationPanel" flex layout class="admin-notifications md-content-notif" ng-controller="NotificationPanelControllerCommon as vm">
+   <md-tabs flex md-stretch-tabs="always" md-selected="vm.currentTab" class="md-hue-3 md-tab-Chatpannel">
+      
+        <md-tab ng-if="!isUserHasMultipleSingleWorkSpace || globalWorkspaceForCollaboration=='Microwave'">
+         <md-tab-label>
+            <label><span translate="Workspace"></span></label>
+         </md-tab-label>
+         <md-tab-body>
+            <md-content>
+               <md-list>
+                  <div>
+                     <md-subheader class="md-primary"><span translate="Workspace Settings"></span></md-subheader>
+                     <md-radio-group ng-model="selectedworkspaceRole" ng-change="updateUserRoleInConfig(selectedworkspaceRole)">
+                        <md-list-item layout="row" layout-align="space-between center" data-ng-repeat="workspace in workspaceRoleList">
+                           <md-radio-button flex  ng-value="workspace.id" class="md-primary">{{workspace.name}}</md-radio-button>
+                        </md-list-item>
+                     </md-radio-group>
+                  </div>
+               </md-list>
+            </md-content>
+         </md-tab-body>
+      </md-tab>
+      <md-tab ng-click="clearPreviousData()" ng-if="(globalWorkspaceForCollaboration=='WIRELESS EnodeB' || globalWorkspaceForCollaboration=='Microwave' || globalWorkspaceForCollaboration=='eNodeB' || globalWorkspaceForCollaboration=='SmartFren') && is_Collaboration_Permission">
+         <md-tab-label> 
+            <label><span translate="Collaboration"></span></label>
+         </md-tab-label>
+         <md-tab-body >
+             <div ng-include="collaboration"></div>
+         </md-tab-body>
+      </md-tab>
+        </md-tabs>
+</md-content>
+<!--
+<script src="../app/assets/js/lib/webrtcjs/webrtcsignal.js"></script>
+<script src="../app/assets/js/lib/webrtcjs/webrtcmain.js"></script>
+-->

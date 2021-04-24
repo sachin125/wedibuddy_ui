@@ -1,0 +1,30 @@
+/* Required height of parents of the Half Page Carousel for proper displaying carousel itself */
+html,
+body,
+.view {
+  height: 100%; 
+ }
+
+@media (max-width: 740px) {
+  .full-page-intro {
+		height: 1000px; 
+   }
+}
+
+/*
+	style="background-image:url('../app/landing-page/img/background-url.png'); background-repeat: no-repeat; background-size: cover;"
+	class="view full-page-intro"
+*/
+
+.fullHeight{
+	height: 100vh;
+
+}
+
+.height_800{
+	height: 800px;
+}
+
+.overflowHidden-x{
+	overflow-x: hidden !important;
+}

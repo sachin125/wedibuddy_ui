@@ -1,0 +1,13 @@
+{
+  "name": "ckeditor-office2013-skin",
+  "homepage": "https://github.com/danyaPostfactum/ckeditor-office2013-skin",
+  "_release": "c206cd0436",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "c206cd04361e4927f3c18de9ecc4f581311792bd"
+  },
+  "_source": "https://github.com/danyaPostfactum/ckeditor-office2013-skin.git",
+  "_target": "*",
+  "_originalSource": "github.com/danyaPostfactum/ckeditor-office2013-skin"
+}

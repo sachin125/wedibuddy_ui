@@ -1,0 +1,57 @@
+<md-content class="contentviewwrapper md-whiteframe-2dp" layout-padding style="background-color: white;">
+	<div>
+		<md-button class="md-icon-button" aria-label="Save" style="float: right;" title="save" ng-click="createUser();">
+			<i class="material-icons">done</i>
+		</md-button>
+	</div>
+	<form name="form1">
+		<div class="siteinputvaluesection">
+			<div class="siteinputrow nomargin">
+				<div layout="row" layout-align="start center">
+					<div class="flex-33">
+						<md-input-container class="md-block">
+							<label>Firstname</label>
+							<input ng-model="user.firstname"/>
+						</md-input-container>
+					</div>
+					<div class="flex-33">
+						<md-input-container class="md-block">
+							<label>Lastname</label>
+							<input ng-model="user.lastname"/>
+						</md-input-container>
+					</div>
+					<div class="flex-33">
+						<md-input-container class="md-block">
+							<label>Password</label>
+							<input type="password" ng-model="user.checkSum"/>
+						</md-input-container>
+					</div>
+				</div>
+			</div>
+		</div>	
+		<div layout="row" layout-wrap layout-align="space-between start">
+            <div class="flex-33">
+				  <md-input-container class="md-block">
+					<label>Gender</label>
+					<md-select name="favoriteColor" ng-model="user.gender" required>
+					  <md-option value="MALE">Male</md-option>
+					  <md-option value="FEMALE">Female</md-option>
+					  <md-option value="OTHER">Female</md-option>
+					</md-select>
+				  </md-input-container>
+            </div>
+			 <div class="flex-33">
+				  <md-input-container class="md-block">
+					<label>Contactno</label>
+					<input ng-model="user.contactno" >
+				  </md-input-container>
+            </div>
+			<div class="flex-33">
+				  <md-input-container class="md-block">
+					<label>Email ID</label>
+					<input ng-model="user.username" >
+				  </md-input-container>
+            </div>
+		</div>
+	</form>
+</md-content>		

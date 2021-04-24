@@ -1,0 +1,48 @@
+<img src="../app/assets/img/logo-sidebar1.png" width="268" height="46" alt="">
+
+<div class="loginbox" id="login-box">
+    <div id='login_error' style='margin-top:3%'>
+        {{loginErrorMsg}}
+    </div>
+
+    <form name="login" id="htmlForm" ng-submit="validateLoginFormEncrypt($event,username_onscreen,password_onscreen);" action="{{action}}" method='post'>
+        <input type="text" name="iv" ng-model="iv" autocomplete="off" style="display:none;" />
+        <input type="text" name="salt" ng-model="salt" autocomplete="off" style="display:none;" />
+        <input type="text" placeholder="Username" autocomplete="off" ng-model='j_username' name='username' style="display:none;" id="j_username">
+        <input type="password" placeholder="Password" autocomplete="off" ng-model='j_password' style="display:none;" name='password' id="j_password">
+        <md-input-container class="md-block">
+            <label class="loginLabel">Username</label>
+            <input autocomplete="off" ng-model="username_onscreen" id="j_username_onscreen" type="text" ng-focus="focusEventTriggered($event)" ng-blur="blurEventTriggered($event)">
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label class="loginLabel">Password</label>
+            <input autocomplete="off" ng-model="password_onscreen" id='j_password_onscreen' type="password">
+        </md-input-container>
+        <div layout="row">
+
+            <md-button ng-if="IS_FORGOT_PWD_BUTTON_ENABLE" data-ng-click="forgotPassword();" class="md-primary" style="margin-left: 0;">Forgot password?</md-button>
+
+            <div flex></div>
+            <md-button type="submit" id="Login_button" class="md-raised md-primary">Login </md-button>
+        </div>
+    </form>
+</div>
+<script>
+    angular.element(document).ready(function() {
+        if (BrowserDetect.browser == "Explorer") {
+            var ieversion = navigator.appVersion.split(';')[1];
+            if (ieversion.indexOf("MSIE 8.0") > -1) {
+                angular.element(document.querySelector('#UsernameLabel')).css('display', "");
+                angular.element(document.querySelector('#PasswordLabel')).css('display', "");
+                angular.element(document.querySelector('#body')).css("min-height", screen.height - screen.height / 6.3);
+            }
+        }
+        if ('<%=CaptchaValid%>' == "Invalid") {
+            angular.element(document.querySelector('#loginFormContrlId')).scope().openForgotPassword();
+            angular.element(document.querySelector('#captcha_error')).html("<font color=\"red\">Invalid Captcha. Please try again</font>");
+        } else {
+            angular.element(document.querySelector('#loginFormContrlId')).scope().defaultLoginPageCall();
+        }
+    });
+</script>

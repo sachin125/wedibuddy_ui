@@ -1,0 +1,570 @@
+<md-content class="md-padding" style="background-color: white;">
+    <md-nav-bar
+      md-no-ink-bar="disableInkBar"
+      md-selected-nav-item="currentNavItem"
+      nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-click="goto('PersonalInformationTab')" name="PersonalInformationTab">
+        Personal Information
+      </md-nav-item>
+       <md-nav-item md-nav-click="goto('FamilyTab')" name="FamilyTab">
+        Family Information
+      </md-nav-item>
+		<md-nav-item md-nav-click="goto('EducationTab')" name="EducationTab">
+        Education
+      </md-nav-item>
+      <md-nav-item md-nav-click="goto('WorkTab')" name="WorkTab">
+        Work
+      </md-nav-item>
+<!--
+      <md-nav-item md-nav-click="goto('ConfigureTab')" name="ConfigureTab">
+        Configure
+      </md-nav-item>
+-->
+      <md-nav-item md-nav-click="goto('UploadPhotoTab')" name="UploadPhotoTab">
+        Upload Photo
+      </md-nav-item>
+    </md-nav-bar>
+</md-content>
+<!--
+PersonalInformationTab
+-->
+<md-content class="contentviewwrapper md-whiteframe-2dp" layout-padding ng-show="PersonalInformationTab">
+	<div layout="row">
+		<div flex></div>
+		<md-button class="md-raised md-primary" ng-click="mergePersonalInfo();" ng-show="IsPersonalInformationEditable">Save</md-button>
+		<md-button class="md-raised md-primary" ng-click="mergePersonalInfo();" ng-show="!IsPersonalInformationEditable">Edit</md-button>
+	</div>
+	<form name="form1">
+		<div layout="row" layout-wrap layout-align="space-between start">
+			<div class="flex-20">
+				<md-input-container class="md-block">
+					<label>Firstname</label>
+					<input ng-model="user.firstname" ng-disabled="!IsPersonalInformationEditable"/>
+				</md-input-container>
+			</div>
+			<div class="flex-20">
+				<md-input-container class="md-block">
+					<label>Lastname</label>
+					<input ng-model="user.lastname" ng-disabled="!IsPersonalInformationEditable"/>
+				</md-input-container>
+			</div>
+			<div class="flex-20">
+				  <md-input-container class="md-block">
+					<label>Gender</label>
+					<md-select name="favoriteColor" ng-model="user.gender" required ng-disabled="!IsPersonalInformationEditable">
+					  <md-option value="MALE">Male</md-option>
+					  <md-option value="FEMALE">Female</md-option>
+					  <md-option value="OTHER">Other</md-option>
+					</md-select>
+				  </md-input-container>
+            </div>
+            <div class="flex-40">
+            </div>
+		</div>
+		<div layout="row" layout-wrap layout-align="space-between start" >
+			 <div class="flex-20">
+				  <md-input-container class="md-block">
+					<label>Contactno</label>
+					<input ng-model="user.contactno" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+			<div class="flex-20">
+				  <md-input-container class="md-block">
+					<label>Email ID</label>
+					<input ng-model="user.username" ng-disabled="!IsPersonalInformationEditable" >
+				  </md-input-container>
+            </div>
+			<div class="flex-20">
+				  <md-input-container class="md-block">
+					<label>Facebook ID</label>
+					<input ng-model="user.facebookId" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+            <div class="flex-40">
+			</div>	
+		</div>
+		<div layout="row" layout-wrap layout-align="space-between start">
+			<div class="flex-20">
+				  <md-input-container class="md-block">
+					<label>DOB</label>
+					<input mdc-datetime-picker date="true" time="true" format="DD MMM YYYY hh:mm a" type="text" placeholder="Select From Date" max-date="dateTimeEnd" ng-model="user.dob" ng-disabled="!IsPersonalInformationEditable"/>
+				  </md-input-container>
+            </div>
+			<div class="flex-20">
+				  <md-input-container class="md-block">
+					<label>Height</label>
+					<input ng-model="user.height" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+            <div class="flex-20">
+				  <md-input-container class="md-block">
+					<label>Weight</label>
+					<input ng-model="user.weight" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+            <div class="flex-40">
+            </div>
+        </div>	
+		<div layout="row" layout-wrap layout-align="space-between start">
+			<div class="flex-33">
+				  <md-input-container class="md-block">
+					<label>Birth location</label>
+					<input ng-model="user.birthAddress.name" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+            <div class="flex-22">
+				  <md-input-container class="md-block">
+					<label>Birth City</label>
+					<input ng-model="user.birthAddress.city" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+             <div class="flex-15">
+				  <md-input-container class="md-block">
+					<label>Birth location Pincode</label>
+					<input ng-model="user.birthAddress.pincode" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+            <div class="flex-15">
+				  <md-input-container class="md-block">
+					<label>Birth state</label>
+					<input ng-model="user.birthAddress.state" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+            <div class="flex-15">
+				  <md-input-container class="md-block">
+					<label>Birth Country</label>
+					<input ng-model="user.birthAddress.country" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+		</div>
+		<div layout="row" layout-wrap layout-align="space-between start">
+			<div class="flex-33">
+				  <md-input-container class="md-block">
+					<label>Current location</label>
+					<input ng-model="user.currentAddress.name" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+            <div class="flex-22">
+				  <md-input-container class="md-block">
+					<label>Current City</label>
+					<input ng-model="user.currentAddress.city" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+             <div class="flex-15">
+				  <md-input-container class="md-block">
+					<label>Current location Pincode</label>
+					<input ng-model="user.currentAddress.pincode" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+             <div class="flex-15">
+				  <md-input-container class="md-block">
+					<label>Current state</label>
+					<input ng-model="user.currentAddress.state" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+            <div class="flex-15">
+				  <md-input-container class="md-block">
+					<label>Birth Country</label>
+					<input ng-model="user.currentAddress.country" ng-disabled="!IsPersonalInformationEditable">
+				  </md-input-container>
+            </div>
+		</div>		
+	</form>
+</md-content>		
+<!--
+FamilyTab
+-->
+<md-content class="contentviewwrapper md-whiteframe-2dp" layout-padding ng-show="FamilyTab">
+	<div layout="row">
+		<div flex></div>
+		<md-button class="md-raised md-primary" ng-click="mergeFamilyInfo();"  ng-hide="IsPersonalInformationEditable">Save</md-button>
+	</div>
+	<form name="form2">
+		<div class="siteinputvaluesection">
+			<div class="siteinputrow nomargin">
+				<div layout="row" layout-align="start center">
+					<div class="flex-33">
+						<md-input-container class="md-block">
+							<label>Father firstname</label>
+							<input ng-model="family.fatherfirstname" ng-disabled="!IsFamilyInformationEditable"/>
+						</md-input-container>
+					</div>
+					<div class="flex-33">
+						<md-input-container class="md-block">
+							<label>Father lastname</label>
+							<input ng-model="family.fatherlastname" ng-disabled="!IsFamilyInformationEditable"/>
+						</md-input-container>
+					</div>
+					<div class="flex-33">
+						<md-input-container class="md-block">
+							<label>Father occupation</label>
+							<input ng-model="family.fatherOccupation" ng-disabled="!IsFamilyInformationEditable"/>
+						</md-input-container>
+					</div>
+				</div>
+			</div>
+		</div>	
+		<div layout="row" layout-wrap layout-align="space-between start">
+				<div class="flex-33">
+					<md-input-container class="md-block">
+						<label>Mother firstname</label>
+						<input ng-model="family.motherfirstname" ng-disabled="!IsFamilyInformationEditable"/>
+					</md-input-container>
+				</div>
+				<div class="flex-33">
+					<md-input-container class="md-block">
+						<label>Mother lastname</label>
+						<input ng-model="family.motherlastname" ng-disabled="!IsFamilyInformationEditable"/>
+					</md-input-container>
+				</div>
+				<div class="flex-33">
+					<md-input-container class="md-block">
+						<label>Mother occupation</label>
+						<input ng-model="family.motherOccupation" ng-disabled="!IsFamilyInformationEditable"/>
+					</md-input-container>
+				</div>
+		</div>
+		<div layout="row" layout-wrap layout-align="space-between start">
+				<div class="flex-22">
+					<md-input-container class="md-block">
+						<label>Deity</label>
+						<input ng-model="family.deity" ng-disabled="!IsFamilyInformationEditable"/>
+					</md-input-container>
+				</div>
+				<div class="flex-22">
+					<md-input-container class="md-block">
+						<label>Goutra</label>
+						<input ng-model="family.goutra" ng-disabled="!IsFamilyInformationEditable"/>
+					</md-input-container>
+				</div>
+				<div class="flex-22">
+					<md-input-container class="md-block">
+						<label>Home Telephone</label>
+						<input ng-model="family.homeContactno" ng-disabled="!IsFamilyInformationEditable"/>
+					</md-input-container>
+				</div>
+				<div class="flex-33">
+					<md-input-container class="md-block">
+						<label>Nanihal</label>
+						<input ng-model="family.nanihal" ng-disabled="!IsFamilyInformationEditable"/>
+					</md-input-container>
+				</div>
+		</div>		
+		<div layout="row" layout-wrap layout-align="space-between start">
+			<div class="flex-33">
+				  <md-input-container class="md-block">
+					<label>HomeTown Location</label>
+					<input ng-model="family.homeAddress.name" ng-disabled="!IsFamilyInformationEditable" />
+				  </md-input-container>
+            </div>
+            <div class="flex-22">
+				  <md-input-container class="md-block">
+					<label>HomeTown City</label>
+					<input ng-model="family.homeAddress.city" ng-disabled="!IsFamilyInformationEditable" />
+				  </md-input-container>
+            </div>
+             <div class="flex-15">
+				  <md-input-container class="md-block">
+					<label>HomeTown Pincode</label>
+					<input ng-model="family.homeAddress.pincode" ng-disabled="!IsFamilyInformationEditable" />
+				  </md-input-container>
+            </div>
+            <div class="flex-15">
+				  <md-input-container class="md-block">
+					<label>HomeTown state</label>
+					<input ng-model="family.homeAddress.state" ng-disabled="!IsFamilyInformationEditable" />
+				  </md-input-container>
+            </div>
+            <div class="flex-15">
+				  <md-input-container class="md-block">
+					<label>HomeTown Country</label>
+					<input ng-model="family.homeAddress.country" ng-disabled="!IsFamilyInformationEditable" />
+				  </md-input-container>
+             </div>
+		</div>		
+		<div layout="row" layout-wrap layout-align="space-between start">
+			<div class="flex-100">
+				  <md-input-container class="md-block">
+					<label>Description</label>
+					<input ng-model="family.description" ng-disabled="!IsFamilyInformationEditable" />
+				  </md-input-container>
+           </div>
+		</div>		
+	</form>
+</md-content>
+<!--
+EducationTab
+-->
+<md-content class="contentviewwrapper md-whiteframe-2dp" layout-padding ng-show="EducationTab">
+	<div>
+		<div ng-if="!educationList">
+			No Data to show
+		</div>
+		<form name="form2" ng-repeat="educationObj in educationList">
+			<div layout="row">
+				<div flex></div>
+				<md-button class="md-raised md-primary" ng-click="mergeEducationInfo();">Save</md-button>
+			</div>
+			<div class="siteinputvaluesection">
+				<div class="siteinputrow nomargin">
+					<div layout="row" layout-align="start center">
+						<div class="flex-20">
+							<md-input-container class="md-block">
+								<label>Course</label>
+								<input ng-model="educationObj.coursename" ng-disabled="!IsEducationInformationEditable"/>
+							</md-input-container>
+						</div>
+						<div class="flex-20">
+							<md-input-container class="md-block">
+								<label>Organization</label>
+								<input ng-model="educationObj.organization" ng-disabled="!IsEducationInformationEditable"/>
+							</md-input-container>
+						</div>
+						<div class="flex-20">
+							<md-input-container class="md-block">
+								<label>Level</label>
+								<input ng-model=""/>
+								<md-select name="favoriteColor" ng-model="educationObj.educationLevel" required ng-disabled="!IsEducationInformationEditable">
+								  <md-option value="HIGH_SCHOOL">High School</md-option>
+								  <md-option value="UNIVERSITY">University</md-option>
+								</md-select>
+							</md-input-container>
+						</div>
+						<div class="flex-20">
+							<md-input-container class="md-block">
+								<label>From</label>
+								<input mdc-datetime-picker date="true" time="false" format="DD MMM YYYY" type="text" placeholder="Select From Date" max-date="dateTimeEnd" ng-model="educationObj.fromDate" ng-disabled="!IsEducationInformationEditable" />
+							</md-input-container>
+						</div>
+						<div class="flex-20">
+							<md-input-container class="md-block">
+								<label>To</label>
+								<input mdc-datetime-picker date="true" time="false" format="DD MMM YYYY" type="text" placeholder="Select From Date" max-date="dateTimeEnd" ng-model="educationObj.toDate" ng-disabled="!IsEducationInformationEditable"/>
+							</md-input-container>
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div layout="row" layout-wrap layout-align="space-between start">
+				<div class="flex-33">
+					  <md-input-container class="md-block">
+						<label>Location</label>
+						<input ng-model="educationObj.address.name" ng-disabled="!IsEducationInformationEditable" />
+					  </md-input-container>
+				</div>
+				<div class="flex-22">
+					  <md-input-container class="md-block">
+						<label>City</label>
+						<input ng-model="educationObj.address.city" ng-disabled="!IsEducationInformationEditable" />
+					  </md-input-container>
+				</div>
+				 <div class="flex-15">
+					  <md-input-container class="md-block">
+						<label>Pincode</label>
+						<input ng-model="educationObj.address.pincode" ng-disabled="!IsEducationInformationEditable" />
+					  </md-input-container>
+				</div>
+				<div class="flex-15">
+					  <md-input-container class="md-block">
+						<label>state</label>
+						<input ng-model="educationObj.address.state" ng-disabled="!IsEducationInformationEditable"/>
+					  </md-input-container>
+				</div>
+				<div class="flex-15">
+					  <md-input-container class="md-block">
+						<label>Country</label>
+						<input ng-model="educationObj.address.country" ng-disabled="!IsEducationInformationEditable" />
+					  </md-input-container>
+				 </div>
+			</div>
+			<div layout="row" layout-wrap layout-align="space-between start">
+				<div class="flex-100">
+					  <md-input-container class="md-block">
+						<label>Description</label>
+						<input ng-model="educationObj.description" ng-disabled="!IsEducationInformationEditable" />
+					  </md-input-container>
+			   </div>
+				<md-divider ng-if="!$last"></md-divider>
+			</div>		
+		</form>
+	</div>
+</md-content> 
+<!--
+WorkTab
+-->
+<md-content class="contentviewwrapper md-whiteframe-2dp" layout-padding ng-show="WorkTab">
+	<div ng-if="!workList">
+		No data to show
+	</div>
+	<div>
+	<form name="form2"  ng-repeat="workObj in workList">
+			<div layout="row">
+				<div flex></div>
+				<md-button class="md-raised md-primary" ng-click="mergeWorkInfo();">Save</md-button>
+			</div>
+		<div class="siteinputvaluesection">
+			<div class="siteinputrow nomargin">
+				<div layout="row" layout-align="start center">
+					<div class="flex-25">
+						<md-input-container class="md-block">
+							<label>Position</label>
+							<input ng-model="workObj.position" ng-disabled="!IsWorkInformationEditable"/>
+						</md-input-container>
+					</div>
+					<div class="flex-25">
+						<md-input-container class="md-block">
+							<label>organization</label>
+							<input ng-model="workObj.organization" ng-disabled="!IsWorkInformationEditable"/>
+						</md-input-container>
+					</div>
+					<div class="flex-25">
+						<md-input-container class="md-block">
+							<label>From</label>
+							<input mdc-datetime-picker date="true" time="false" format="DD MMM YYYY" type="text" placeholder="Select From Date" max-date="dateTimeEnd" ng-model="workObj.fromDate"  ng-disabled="!IsWorkInformationEditable"/>
+						</md-input-container>
+					</div>
+					<div class="flex-25">
+						<md-input-container class="md-block">
+							<label>To</label>
+							<input mdc-datetime-picker date="true" time="false" format="DD MMM YYYY" type="text" placeholder="Select From Date" max-date="dateTimeEnd" ng-model="workObj.toDate"  ng-disabled="!IsWorkInformationEditable"/>
+						</md-input-container>
+					</div>
+				</div>
+			</div>
+		</div>	
+		<div layout="row" layout-wrap layout-align="space-between start">
+			<div class="flex-33">
+				  <md-input-container class="md-block">
+					<label>Location</label>
+					<input ng-model="workObj.address.name"  ng-disabled="!IsWorkInformationEditable">
+				  </md-input-container>
+            </div>
+            <div class="flex-22">
+				  <md-input-container class="md-block">
+					<label>City</label>
+					<input ng-model="workObj.address.city"  ng-disabled="!IsWorkInformationEditable">
+				  </md-input-container>
+            </div>
+             <div class="flex-15">
+				  <md-input-container class="md-block">
+					<label>Pincode</label>
+					<input ng-model="workObj.address.pincode"  ng-disabled="!IsWorkInformationEditable">
+				  </md-input-container>
+            </div>
+            <div class="flex-15">
+				  <md-input-container class="md-block">
+					<label>state</label>
+					<input ng-model="workObj.address.state"  ng-disabled="!IsWorkInformationEditable">
+				  </md-input-container>
+            </div>
+            <div class="flex-15">
+				  <md-input-container class="md-block">
+					<label>Country</label>
+					<input ng-model="workObj.address.country"  ng-disabled="!IsWorkInformationEditable">
+				  </md-input-container>
+             </div>
+		</div>
+		<div layout="row" layout-wrap layout-align="space-between start">
+			<div class="flex-100">
+				  <md-input-container class="md-block">
+					<label>Description</label>
+					<input ng-model="workObj.description"  ng-disabled="!IsWorkInformationEditable">
+				  </md-input-container>
+           </div>
+			<md-divider ng-if="!$last"></md-divider>
+		</div>		
+	</form>
+	</div>
+</md-content>
+<!--
+ConfigureTab
+-->
+<md-content class="contentviewwrapper md-whiteframe-2dp" layout-padding ng-show="ConfigureTab">
+	<div>
+		<div>
+			<md-button class="md-icon-button" aria-label="Save" title="save">
+				<i class="material-icons">done</i>
+			</md-button>
+		</div>
+	<form name="form2">
+		<div class="siteinputvaluesection">
+			<div class="siteinputrow nomargin">
+				<div layout="row" layout-align="start center">
+					<div class="flex-25">
+						<md-input-container class="md-block">
+							<label>Course Name</label>
+							<input ng-model="workObj.name"/>
+						</md-input-container>
+					</div>
+					<div class="flex-25">
+						<md-input-container class="md-block">
+							<label>Level</label>
+							<input ng-model="workObj.educationLevel"/>
+						</md-input-container>
+					</div>
+					<div class="flex-25">
+						<md-input-container class="md-block">
+							<label>From</label>
+							<md-datepicker ng-model="workObj.fromDate" md-current-view="year" md-placeholder="Enter date"></md-datepicker>
+						</md-input-container>
+					</div>
+					<div class="flex-25">
+						<md-input-container class="md-block">
+							<label>To</label>
+							<md-datepicker ng-model="workObj.toDate" md-current-view="year" md-placeholder="Enter date"></md-datepicker>
+						</md-input-container>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</form>
+	</div>
+</md-content>	
+<md-content class="contentviewwrapper md-whiteframe-2dp" layout-padding ng-show="UploadPhotoTab">
+	 <md-dialog-actions layout="row"> <span flex></span>
+		<md-button class="md-raised md-primary md-status-button" ng-click="cancel()">
+			<span translate="Cancel"></span>
+		</md-button>
+		<md-button class="md-raised md-primary md-status-button" ng-disabled="files==''" ng-click="mergeDp();" >
+			<span translate="Upload"></span>
+		</md-button>
+	</md-dialog-actions>
+	 <md-dialog-content layout="row">
+		 <div flex="20">
+			<img ng-src="{{dpPath}}" onerror="this.src=''" alt="No Image Found" />
+		 </div>
+		<div class="md-dialog-content" flex="80">
+			<form name="uploadForm">
+				<div id="dropbox" class="dropboxmodal" layout="column" layout-fill layout-align="center center" ngf-drop="setFiles($files)" ng-model="files" ngf-drag-over-class="'dragover'" ngf-multiple="false" ngf-allow-dir="false">
+					<p style="color:red">{{message}}</p>
+					<div class="dropboxmodalwrapper"> <i class="zmdi zmdi-cloud-upload"></i> <span class="md-headline"><span translate="Drop Image to Upload"></span></span>
+						<div layout-padding>
+							<md-button class="md-raised md-primary md-status-button" ngf-select="setFiles($files)" ngf-multiple="true"><span translate="Browse"></span></md-button>
+						</div>
+					</div>
+				</div>
+				<div class="dropboxbottomtext" layout="row">
+					<div flex class="md-body-1 color-54"><span translate="Supported: jpg, png"></span></div>
+					<div class="md-body-1 color-54"><span translate="Maximum file size: 1MB"></span></div>
+				</div>
+				<div class="dropboxbottomtext text-center" layout="row"> </div>
+				<div ng-show="files.length">
+					<md-list class="sd-list">
+						<md-list-item class="md-2-line" ng-repeat="file in files"> <img ng-src="{{fileType}}" class="md-avatar" alt="{{'Material Issue.pdf'}}" />
+							<div class="md-list-item-text" layout="column">
+								<h4>{{ file.name }}</h4>
+								<p ng-switch="file.size > 1024*1024"> <span ng-switch-when="true">{{file.size / 1024 / 1024 | number:2}} MB</span> <span ng-switch-default>{{file.size / 1024 | number:2}} kB</span> </p>
+							</div>
+							<md-button class="md-icon-button" ng-click="remove($event)" aria-label="Remove File">
+								<md-icon aria-label="Remove File" class="zmdi zmdi-delete"></md-icon>
+							</md-button>
+						</md-list-item>
+					</md-list>
+					<div ng-show="progressVisible">
+						<md-progress-linear md-mode="determinate" value="{{progress}}"></md-progress-linear>
+					</div>
+				</div>
+			</form>
+		</div>
+	</md-dialog-content>
+</md-content>	
