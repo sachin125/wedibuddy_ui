@@ -28,9 +28,9 @@
     function addToWish(userid,status,description){
 		var url = "";
 		if($filter('HasValueFilterCore')(description)){
-			url = UrlConstantsCommon.WISH_ADD_TO_WISH_URL+"/"+userid+"&status="+status+"&description="+description;
+			url = UrlConstantsCommon.WISH_ADD_TO_WISH_URL+"/"+userid+"?&status="+status+"&description="+description;
 		}else{
-			url = UrlConstantsCommon.WISH_ADD_TO_WISH_URL+"/"+userid+"&status="+status;
+			url = UrlConstantsCommon.WISH_ADD_TO_WISH_URL+"/"+userid+"?&status="+status;
 		}
 		
 		if($filter('HasValueFilterCore')(url)){

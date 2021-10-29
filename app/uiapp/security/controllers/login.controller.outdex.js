@@ -194,7 +194,7 @@
         $scope.validateLoginFormEncrypt = validateLoginFormEncrypt;
         // function to validate login form and encrypt field
         function validateLoginFormEncrypt(ev, username, checksum) {
-			console.log('username:: ',username+'   checksum::: '+checksum);
+			console.log('username:: '+username+'   checksum::: '+checksum);
             //var username = $scope.username_onscreen;
             //var checksum = $scope.password_onscreen;
             if (hasValue(username) && hasValue(checksum)) {
@@ -241,8 +241,7 @@
         //function to get access token if user is vaild
         function loginButtonClick(username, encryptedChecksum) {
 
-			//$scope.action = context + "/login";
-            $scope.action = "/login";
+			$scope.action = context + "/login";
             console.log('loginButtonClick::  ',context+" $scope.action: "+$scope.action);
             document.forms.htmlForm.submit();
 

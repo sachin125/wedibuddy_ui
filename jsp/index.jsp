@@ -165,8 +165,8 @@ String userTimeZone;
 <script src="../app/uiapp/common/src/dashboard/services/dashboard.service.common.js"></script> 
 <script src="../app/uiapp/common/src/notificationpanel/controllers/notification.controller.common.js"></script> 
 <script src="../app/uiapp/common/src/notificationpanel/controllers/notificationpanel.controller.common.js"></script> 
-<script src="../app/uiapp/common/src/Bridge_Groom/services/bridgeGroom.service.common.js"></script> 
-<script src="../app/uiapp/common/src/Bridge_Groom/controllers/bridgeGroom.controller.common.js"></script> 
+<script src="../app/uiapp/common/src/girls_boys/services/girlsboys.service.common.js"></script> 
+<script src="../app/uiapp/common/src/girls_boys/controllers/girlsboys.controller.common.js"></script> 
 <script src="../app/uiapp/common/src/wish/services/wish.service.common.js"></script> 
 <script src="../app/uiapp/common/src/wish/controllers/wish.controller.common.js"></script> 
 

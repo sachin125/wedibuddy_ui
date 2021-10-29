@@ -1,100 +1,49 @@
 <div layout="row">
-   <div layout-padding layout-xs="column" layout="column" flex="55" style="background-color: #fff;margin: 5px;">
-	   <label>About {{userAOWrapperCount}} results</label>
-		<div layout="row" ng-if="!userAOWrapperCount">
-			Data not available
-		</div>
-		<div layout="row" ng-repeat="userAOWrapper in userAOWrapperList">
-        <div flex="25" ng-if="userAOWrapper.targetuser.gender=='Male'">
-			<img ng-src="{{userAOWrapper.targetuser.userProfile.dpPath}}" class="md-card-image" alt="Washed Out" style="height: 220px;width: 200px;" ng-error="this.src='{{imagePath}}'">
-        </div>
-        <div flex="25" ng-if="userAOWrapper.targetuser.gender=='Female'">
-			<img ng-src="{{userAOWrapper.targetuser.userProfile.dpPath}}" class="md-card-image" alt="Washed Out" style="height: 220px;width: 200px;" ng-error="this.src='{{imagePath}}'">
-        </div>
-        <div layout="column" layout-align="space-between none" flex="70">
-			<md-table-container class="sd-data-table-container">
-			<table md-table>
-				<tbody md-body>
-					<tr md-row>
-						<td md-cell>Name</td>
-						<td md-cell>{{userAOWrapper.targetuser.firstname}} {{userAOWrapper.targetuser.lastname}}</td>
-					</tr>
-					<tr md-row>
-						<td md-cell>Father</td>
-						<td md-cell>{{userAOWrapper.targetuser.userProfile.family.fatherfirstname}} {{userAOWrapper.targetuser.userProfile.family.fatherlastname}}</td>
-					</tr>
-					<tr md-row>
-						<td md-cell>Mother</td>
-						<td md-cell>{{userAOWrapper.targetuser.userProfile.family.motherfirstname}} {{userAOWrapper.targetuser.userProfile.family.motherlastname}} </td>
-					</tr>
-					<tr md-row>
-						<td md-cell>Deity</td>
-						<td md-cell>{{userAOWrapper.targetuser.userProfile.family.deity}}</td>
-					</tr>
-					<tr md-row>
-						<td md-cell>Goutra</td>
-						<td md-cell>{{userAOWrapper.targetuser.userProfile.family.goutra}}</td>
-					</tr>
-					<tr md-row>
-						<td md-cell>DOB: </td>
-						<td md-cell>{{userAOWrapper.targetuser.dob | date:'fullDate'}}</td>
-					</tr>
-					<tr md-row>
-						<td md-cell>
-							Age:
-						</td>
-						<td md-cell>
-							{{userAOWrapper.targetuser.age}}
-						</td>
-						<td md-cell>
-							Height:
-						</td>
-						<td md-cell>
-							{{userAOWrapper.targetuser.userProfile.height}}
-						</td>
-					</tr>
-					<tr md-row>
-						<td md-cell>Education: </td>
-						<td md-cell>{{userAOWrapper.targetuser.userProfile.education.name}}</td>
-					</tr>
-					<tr md-row>
-						<td md-cell>Work: </td>
-						<td md-cell>{{userAOWrapper.targetuser.userProfile.work.position}}</td>
-					</tr>
-					<tr md-row>
-						<td md-cell>Home Telephone: </td>
-						<td md-cell>{{userAOWrapper.targetuser.userProfile.family.homeContactno}}</td>
-					</tr>
-					<tr md-row>
-						<td md-cell>HomeTown: </td>
-						<td md-cell>{{userAOWrapper.targetuser.userProfile.family.homeAddress.city}} {{userAOWrapper.targetuser.userProfile.family.homeAddress.state}}</td>
-					</tr>
-				</tbody>
-			</table>
-			</md-table-container>
-		</div>
-		<div flex="5">
-			<md-menu md-position-mode="target-right target">
-			  <md-button class="md-icon-button" aria-label="Actions" ng-click="openTableMenu($mdOpenMenu, $event)">
-				<md-icon aria-label="Actions" class="zmdi zmdi-more-vert"></md-icon>
-			  </md-button>
-			  <md-menu-content width="3">
-				<md-menu-item>
-				  <md-button ng-click="viewProfile(userAOWrapper.targetuser);">
-					<md-icon aria-label="View Profile" class="zmdi zmdi-info"></md-icon>View Profile
-				  </md-button>
-				</md-menu-item>
-				<md-menu-item>
-				  <md-button ng-click="removeFromWish(userAOWrapper.targetuser.id);">
-					<md-icon aria-label="Remove from Wish" class="zmdi zmdi-pocket"></md-icon>Remove From Wish
-				  </md-button>
-				</md-menu-item>
-			</md-menu-content>
-			</md-menu>
-        </div>
-		<md-divider></md-divider>
-      </div>
-  </div>
+	<div layout-padding layout-xs="column" layout="column" flex="55" style="background-color: #fff;margin: 5px;">
+		<label>About {{userAOWrapperCount}} results</label>
+		 <div layout="row" ng-if="!userAOWrapperCount">
+			 Data not available
+		 </div>
+		 <div layout="row" ng-repeat="userAOWrapper in userAOWrapperList" >
+			 <md-content class="md-padding" flex>
+				 <div layout="column">
+					 <md-card md-theme="default" md-theme-watch>
+						 <md-card-title>
+						 <md-card-title-text>
+							 <span class="md-headline">{{userAOWrapper.targetuser.firstname}} {{userAOWrapper.targetuser.lastname}}</span>
+							 <span class="md-subhead">Father: {{userAOWrapper.targetuser.userProfile.family.fatherfirstname}} {{userAOWrapper.targetuser.family.userProfile.fatherlastname}}</span>
+							 <span class="md-subhead">Mother: {{userAOWrapper.targetuser.userProfile.family.motherfirstname}} {{userAOWrapper.targetuser.userProfile.family.motherlastname}}</span>
+							 <span class="md-subhead">Deity: {{userAOWrapper.targetuser.userProfile.family.deity.name}}</span>
+							 <span class="md-subhead">Goutra: {{userAOWrapper.targetuser.userProfile.family.goutra.name}}</span>
+							 <span class="md-subhead">DOB: {{userAOWrapper.targetuser.dob | date:'fullDate'}}</span>
+							 <span class="md-subhead">Age: {{userAOWrapper.targetuser.age}} Height: {{userAOWrapper.targetuser.userProfile.height}}</span>
+							 <span class="md-subhead">Education: {{userAOWrapper.targetuser.userProfile.education.coursename}}</span>
+							 <span class="md-subhead">Work:{{userAOWrapper.targetuser.userProfile.work.position}}</span>
+							 <span class="md-subhead">Home contact no:{{userAOWrapper.targetuser.userProfile.family.homeContactno}}</span>
+							 <span class="md-subhead">Home Address:{{userAOWrapper.targetuser.userProfile.family.homeAddress.city}} {{userAOWrapper.targetuser.userProfile.family.homeAddress.state}}</span>
+						 </md-card-title-text>
+						 <md-card-title-media>
+							 <div class="md-media-lg card-media">
+								 <img ng-src="{{userAOWrapper.targetuser.userProfile.dpPath}}" class="md-card-image" alt="Image not found" style="height: 220px;width: 200px;" ng-error="this.onerror=null; this.src='{{imagePath}}'">
+							 </div>
+						 </md-card-title-media>
+						 </md-card-title>
+						 <md-card-actions layout="row" layout-align="end center">
+							 <md-button ng-click="addtolike(userAOWrapper.user.id);">
+								 <md-icon aria-label="Like" class="zmdi zmdi-thumb-up"></md-icon>Like
+							   </md-button>
+							 <md-button ng-click="viewProfile(userAOWrapper.targetuser);">
+								 <md-icon aria-label="View Profile" class="zmdi zmdi-info"></md-icon>View Profile
+							 </md-button>
+							 <md-button ng-click="removeFromWish(userAOWrapper.targetuser.id);">
+								 <md-icon aria-label="Remove from Wish" class="zmdi zmdi-pocket"></md-icon>Add to Wish
+							 </md-button>
+						 </md-card-actions>
+					 </md-card>
+				 </div>
+			 </md-content>
+		 </div>
+	</div>
   <div flex="45" style="background-color: #fff;margin: 5px;margin-left: 0px;">
   </div>
   

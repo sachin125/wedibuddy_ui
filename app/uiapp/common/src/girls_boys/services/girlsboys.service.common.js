@@ -2,11 +2,11 @@
   'use strict';
 
   angular.module('app.common')
-  .service('BridgeGroomServiceCommon', BridgeGroomServiceCommon);
+  .service('GirlsBoysServiceCommon', GirlsBoysServiceCommon);
 
-	BridgeGroomServiceCommon.$inject = [ '$translate', '$resource', '$http','$filter', 'UrlConstantsCore', 'GlobalConstantsCore','$rootScope','$state','IndexServiceCore','UrlConstantsCommon','GlobalValuesCore'];
+	GirlsBoysServiceCommon.$inject = [ '$translate', '$resource', '$http','$filter', 'UrlConstantsCore', 'GlobalConstantsCore','$rootScope','$state','IndexServiceCore','UrlConstantsCommon','GlobalValuesCore'];
 
-  function BridgeGroomServiceCommon($translate, $resource, $http,$filter, UrlConstantsCore, GlobalConstantsCore,$rootScope,$state,IndexServiceCore,UrlConstantsCommon,GlobalValuesCore) {
+  function GirlsBoysServiceCommon($translate, $resource, $http,$filter, UrlConstantsCore, GlobalConstantsCore,$rootScope,$state,IndexServiceCore,UrlConstantsCommon,GlobalValuesCore) {
 
 	var service = {
         search: search,
@@ -53,7 +53,7 @@ z
     function addToWish(username,description){
 		var url = "";
 		if($filter('HasValueFilterCore')(description)){
-			url = UrlConstantsCommon.WISH_ADD_TO_WISH_URL+"/"+username+"&description="+description;
+			url = UrlConstantsCommon.WISH_ADD_TO_WISH_URL+"/"+username+"?&description="+description;
 		}else{
 			url = UrlConstantsCommon.WISH_ADD_TO_WISH_URL+"/"+username;
 		}

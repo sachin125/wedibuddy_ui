@@ -28,9 +28,9 @@
         };
         
         var UserTab = {
-            name: 'Bridge/Groom',
+            name: 'Girls/Boys',
             icon: 'zmdi zmdi-male-female',
-            href : StatesConstantsCommon.BRIDGEGROOM_STATE
+            href : StatesConstantsCommon.GIRLSBOYS_STATE
         };
         
         var MyWish = {

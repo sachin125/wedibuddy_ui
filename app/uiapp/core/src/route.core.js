@@ -132,11 +132,14 @@
         },
         resolve: {
 			DataById: function ($stateParams,UrlConstantsCore,IndexServiceCore){
-				var username = 'sachingupta125@gmail.com';//GlobalValuesCore.USER_CONTEXT.username;
+				console.log('GlobalValuesCore.USER_CONTEXT.username::::   ',GlobalValuesCore.USER_CONTEXT.username);
+				console.log('$stateParams.username::::   ',$stateParams.username);
+				
+				//~ var username = 'sachin';//GlobalValuesCore.USER_CONTEXT.username;
 				//~ if($filter('HasValueFilterCore')($stateParams.username)){
-					//~ username=$stateParams.username;
+					 //~ username=$stateParams.username;
 				//~ }
-				var url = UrlConstantsCore.USER_PROFILE_URL+"/"+username;
+				var url = UrlConstantsCore.USER_PROFILE_URL+"/"+'sachin';
 				console.log('StatesConstantsCore.PROFILE url: ',url);
 				var promise = IndexServiceCore.sendGETRequest(url);
 				return promise;

@@ -1,9 +1,9 @@
 (function() {
     'use strict';
-    angular.module('app.common').controller('BridgeGroomController', BridgeGroomController);
-    BridgeGroomController.$inject = [ '$translate','$scope', '$rootScope', 'StatesConstantsCommon', 'GlobalValuesCore', 'TemplatesConstantsCore', 'GlobalConstantsCore', '$filter', 'UrlConstantsCommon', '$timeout', '$state','breadcumb','BridgeGroomServiceCommon','StatesConstantsCore','WishServiceCommon'];
+    angular.module('app.common').controller('GirlsBoysController', GirlsBoysController);
+    GirlsBoysController.$inject = [ '$translate','$scope', '$rootScope', 'StatesConstantsCommon', 'GlobalValuesCore', 'TemplatesConstantsCore', 'GlobalConstantsCore', '$filter', 'UrlConstantsCommon', '$timeout', '$state','breadcumb','GirlsBoysServiceCommon','StatesConstantsCore','WishServiceCommon'];
 
-    function BridgeGroomController($translate, $scope, $rootScope,StatesConstantsCommon, GlobalValuesCore, TemplatesConstantsCore, GlobalConstantsCore, $filter, UrlConstantsCommon, $timeout, $state,breadcumb,BridgeGroomServiceCommon,StatesConstantsCore,WishServiceCommon) {
+    function GirlsBoysController($translate, $scope, $rootScope,StatesConstantsCommon, GlobalValuesCore, TemplatesConstantsCore, GlobalConstantsCore, $filter, UrlConstantsCommon, $timeout, $state,breadcumb,GirlsBoysServiceCommon,StatesConstantsCore,WishServiceCommon) {
         var self = this;
         $rootScope.breadcumb = breadcumb;
         var originatorEv;
@@ -24,12 +24,12 @@
         $scope.userList=[];
 		$scope.userAOWrapperList=[];
         $scope.userWrapper={};
-        $scope.userWrapper = BridgeGroomServiceCommon.initiateUserWrapper();
+        $scope.userWrapper = GirlsBoysServiceCommon.initiateUserWrapper();
          		
 		$scope.filterUser = function(){
 			var userWrapper = $scope.userWrapper;
 			console.log('userWrapper:: ',$scope.userWrapper);
-			BridgeGroomServiceCommon.filterUser(userWrapper).then(function(response) {
+			GirlsBoysServiceCommon.filterUser(userWrapper).then(function(response) {
 				console.log(response);
 				$scope.userAOWrapperList=[];	
 				if ($filter('HasValueFilterCore')(response)) {	
@@ -42,7 +42,7 @@
         $scope.filterUser();
         
         $scope.addToWish = function(username,description){
-			var promise = WishServiceCommon.addToWish(username,'Liked',description);
+			var promise = WishServiceCommon.addToWish(username,'Like',description);
 			console.log('promise:: ',promise);
 		}
 		

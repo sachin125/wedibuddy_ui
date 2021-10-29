@@ -39,17 +39,17 @@ function config($stateProvider, $urlRouterProvider, StatesConstantsCommon, Templ
 			  }
 			}
 		})
-	.state(StatesConstantsCommon.BRIDGEGROOM_STATE, {
-        url: "/bridgegroom",
-        templateUrl: TemplatesConstantsCommon.BRIDGE_GROOM_HTML,
-        controller: 'BridgeGroomController as ctrl',
-        activetab: StatesConstantsCommon.BRIDGEGROOM_STATE,
+	.state(StatesConstantsCommon.GIRLSBOYS_STATE, {
+        url: "/girlsboys",
+        templateUrl: TemplatesConstantsCommon.GIRLS_BOYS_HTML,
+        controller: 'GirlsBoysController as ctrl',
+        activetab: StatesConstantsCommon.GIRLSBOYS_STATE,
         data: {
-          parent: StatesConstantsCommon.BRIDGEGROOM_STATE,
+          parent: StatesConstantsCommon.GIRLSBOYS_STATE,
         },
         resolve: {
 			breadcumb: function($stateParams) {
-				return ['Bridge/Groom'];
+				return ['girls/Boys'];
 			  }
 			}
 		})
